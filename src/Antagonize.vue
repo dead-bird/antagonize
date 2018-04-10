@@ -1,17 +1,17 @@
 <template>
-  <div id="app">
+  <div id="antagonize">
     <router-view/>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'App',
+  name: 'antagonize',
 };
 </script>
 
 <style>
-#app {
+#antagonize {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
