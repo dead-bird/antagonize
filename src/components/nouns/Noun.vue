@@ -5,7 +5,7 @@ export default {
 
 <template>
   <div>
-    <h1>Noun</h1>
+    <h1>Noun: {{ $route.params.id }}</h1>
   </div>
 </template>
 

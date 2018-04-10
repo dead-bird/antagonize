@@ -5,7 +5,7 @@ export default {
 
 <template>
   <div>
-    <h1>Modifier</h1>
+    <h1>Modifier: {{ $route.params.id }}</h1>
   </div>
 </template>
 
