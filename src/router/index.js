@@ -12,23 +12,25 @@ export default new Router({
   routes: [
     {
       path: '/',
-      component: Home
+      component: Home,
     },
+
     {
       path: '/modifiers',
       component: Modifiers,
-      children: {
-        path: ':id',
-        component: Modifier
-      }
     },
+    {
+      path: '/modifier/:id',
+      component: Modifier,
+    },
+
     {
       path: '/nouns',
       component: Nouns,
-      children: {
-        path: ':id',
-        component: Noun
-      }
-    }
-  ]
-})
+    },
+    {
+      path: '/noun/:id',
+      component: Noun,
+    },
+  ],
+});
