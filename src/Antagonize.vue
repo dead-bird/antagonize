@@ -11,6 +11,8 @@ export default {
 </script>
 
 <style>
+/* @import 'main.scss'; */
+
 #antagonize {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
