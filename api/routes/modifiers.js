@@ -3,9 +3,20 @@
 const express   = require('express');
 const router    = express.Router();
 
+const eg = [
+  { text: 'blah', nsfw: false, },
+  { text: 'test', nsfw: false, },
+  { text: 'what', nsfw: false, },
+  { text: 'data', nsfw: false, },
+  { text: 'words', nsfw: false, },
+  { text: 'nice', nsfw: false, },
+  { text: 'yeah', nsfw: false, },
+  { text: 'zoop', nsfw: false, },
+];
+
 /* Get All Modifiers */
 router.get('/', (req, res, next) => {
-  res.send('Get All Modifiers');
+  res.send(eg);
   // Modifiers.find((err, modifiers) => {
   //   console.log(modifiers);
   // });
@@ -13,7 +24,7 @@ router.get('/', (req, res, next) => {
 
 /* Get a Modifier by ID */
 router.get('/:id', (req, res, next) => {
-  res.send('Get a Modifier by ID');
+  res.send(eg[0]);
   // Modifiers.find((err, modifiers) => {
   //   console.log(modifiers);
   // });
