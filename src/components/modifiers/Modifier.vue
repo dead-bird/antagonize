@@ -1,5 +1,5 @@
 <script>
-import axios from 'axios';
+import api from '@/resources/index';
 
 export default {
   data() {
@@ -8,32 +8,29 @@ export default {
     };
   },
 
-  created() {
-    this.api();
-  },
-
   methods: {
-    api() {
+    fetch() {
       const p = this.$route.params;
-      const api = process.env.API;
-      console.log(`${api}modifiers/${p.id}`);
 
-      axios.get(`${api}modifiers/${p.id}`).then((res) => {
-        this.modifiers = res;
-        console.log(res);
+      api.get(`modifiers/${p.id}`).then((res) => {
+        this.modifiers = res.data;
       }).catch((error) => {
-        console.log(error);
+        this.modifiers = `an error has occured: ${error}`;
       });
     },
+  },
+
+  created() {
+    this.fetch();
   },
 };
 </script>
 
 <template>
-  <div>
+  <div class="container">
     <h1>Modifier: {{ $route.params.id }}</h1>
 
-    <pre>{{modifiers}}</pre>
+    <pre>{{ modifiers }}</pre>
   </div>
 </template>
 
