@@ -1,5 +1,4 @@
-// const Modifiers = require('../models.js');
-// const mongoose  = require('mongoose');
+const Modifiers = require('./model.js');
 const express   = require('express');
 const router    = express.Router();
 
@@ -14,12 +13,16 @@ const eg = [
   { text: 'zoop', nsfw: false, },
 ];
 
+const test = {
+  text: 'test data',
+  nsfw: false,
+}
+
 /* Get All Modifiers */
 router.get('/', (req, res, next) => {
-  res.send(eg);
-  // Modifiers.find((err, modifiers) => {
-  //   console.log(modifiers);
-  // });
+  Modifiers.find((err, modifiers) => {
+    res.json(modifiers);
+  });
 });
 
 /* Get a Modifier by ID */
@@ -33,9 +36,14 @@ router.get('/:id', (req, res, next) => {
 /* Save a Modifier */
 router.post('/:id', (req, res, next) => {
   res.send('Save a Modifier');
-  // Modifiers.find((err, modifiers) => {
-  //   console.log(modifiers);
-  // });
+
+  console.log('post received');
+
+  Modifiers.create(test, (err, post) => {
+    if (err) return next(err);
+
+    res.json(post);
+  });
 });
 
 /* Update a Modifier */

@@ -1,7 +1,6 @@
-// const Nouns     = require('../models.js');
-// const mongoose = require('mongoose');
-const express  = require('express');
-const router   = express.Router();
+const Nouns   = require('./model.js');
+const express = require('express');
+const router  = express.Router();
 
 const eg = [
   { text: 'blah', nsfw: false, },
