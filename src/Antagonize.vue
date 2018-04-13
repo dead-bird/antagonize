@@ -1,14 +1,18 @@
+<script>
+import Head from '@/components/parts/Head';
+
+export default {
+  components: { Head },
+};
+</script>
+
 <template>
   <div id="antagonize">
+    <Head />
+
     <router-view/>
   </div>
 </template>
-
-<script>
-export default {
-  name: 'antagonize',
-};
-</script>
 
 <style>
 @import 'styles/main.scss';
