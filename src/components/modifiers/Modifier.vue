@@ -10,9 +10,7 @@ export default {
 
   methods: {
     fetch() {
-      const p = this.$route.params;
-
-      api.get(`modifiers/${p.id}`).then((res) => {
+      api.get(`modifiers/${this.$route.params.id}`).then((res) => {
         this.modifiers = res.data;
       }).catch((error) => {
         this.modifiers = `an error has occured: ${error}`;
