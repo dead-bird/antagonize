@@ -11,13 +11,5 @@ export default {
 </script>
 
 <style>
-/* @import 'main.scss'; */
-
-#antagonize {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+@import 'styles/main.scss';
 </style>

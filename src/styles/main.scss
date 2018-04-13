@@ -1,3 +1,24 @@
+body {
+  background-color: #2d2f37;
+  color: #e6e6e6;
+  font-family: Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.2;
+}
+
 pre {
-  border: 1px dashed coral;
+  padding: 20px;
+  margin: 15px 0;
+  border: 2px dashed tomato;
+  // background-color: #e6e6e6;
+  color: coral;
+}
+
+h1 {
+  font-size: 55px;
+  margin-bottom: .5em;
+}
+
+.head {
+  padding: 60px 0;
 }
