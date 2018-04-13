@@ -21,7 +21,7 @@ export default new Router({
       component: Modifiers,
     },
     {
-      path: '/modifier/:id',
+      path: '/modifiers/:id',
       component: Modifier,
     },
 
@@ -30,7 +30,7 @@ export default new Router({
       component: Nouns,
     },
     {
-      path: '/noun/:id',
+      path: '/nouns/:id',
       component: Noun,
     },
 
