@@ -28,6 +28,10 @@ export default {
   <div class="container">
     <h1>All Modifiers</h1>
 
+    <div v-for="modifier in modifiers" :key="modifier._id">
+      <router-link :to="modifier._id" append>{{ modifier.text }}</router-link>
+    </div>
+
     <pre>{{ modifiers }}</pre>
   </div>
 </template>
