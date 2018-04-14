@@ -1,5 +1,5 @@
 <script>
-import api from '@/resources/index';
+import api from '@/resources/base';
 
 export default {
   data() {
