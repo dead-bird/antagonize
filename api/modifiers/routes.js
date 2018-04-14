@@ -27,10 +27,11 @@ router.get('/', (req, res, next) => {
 
 /* Get a Modifier by ID */
 router.get('/:id', (req, res, next) => {
-  res.send(eg[0]);
-  // Modifiers.find((err, modifiers) => {
-  //   console.log(modifiers);
-  // });
+  Modifiers.findById(req.params.id, (err, post) => {
+    if (err) return next(err);
+
+    res.json(post);
+  });
 });
 
 /* Save a Modifier */

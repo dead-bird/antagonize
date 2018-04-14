@@ -4,16 +4,16 @@ import api from '@/resources/index';
 export default {
   data() {
     return {
-      modifiers: [],
+      modifier: {},
     };
   },
 
   methods: {
     fetch() {
       api.get(`modifiers/${this.$route.params.id}`).then((res) => {
-        this.modifiers = res.data;
+        this.modifier = res.data;
       }).catch((error) => {
-        this.modifiers = `an error has occured: ${error}`;
+        this.modifier = `an error has occured: ${error}`;
       });
     },
   },
@@ -28,7 +28,9 @@ export default {
   <div class="container">
     <h1>Modifier: {{ $route.params.id }}</h1>
 
-    <pre>{{ modifiers }}</pre>
+    <h2>{{ modifier.text }}</h2>
+
+    <pre>{{ modifier }}</pre>
   </div>
 </template>
 
