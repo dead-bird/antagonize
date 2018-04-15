@@ -9,12 +9,8 @@ export default {
   },
 
   methods: {
-    fetch() {
-      api.get('modifiers').then((res) => {
-        this.modifiers = res.data;
-      }).catch((error) => {
-        this.modifiers = `an error has occured: ${error}`;
-      });
+    async fetch() {
+      this.modifiers = await api.get('modifiers');
     },
   },
 
@@ -28,11 +24,11 @@ export default {
   <div class="container">
     <h1>All Modifiers</h1>
 
-    <div v-for="modifier in modifiers" :key="modifier._id">
+    <div v-for="modifier in modifiers.data" :key="modifier._id">
       <router-link :to="modifier._id" append>{{ modifier.text }}</router-link>
     </div>
 
-    <pre>{{ modifiers }}</pre>
+    <pre>{{ modifiers.data }}</pre>
   </div>
 </template>
 

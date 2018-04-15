@@ -9,12 +9,8 @@ export default {
   },
 
   methods: {
-    fetch() {
-      api.get('insult').then((res) => {
-        this.insult = res.data;
-      }).catch((error) => {
-        this.insult = `an error has occured: ${error}`;
-      });
+    async fetch() {
+      this.insult = await api.get('insult');
     },
   },
 
@@ -25,7 +21,7 @@ export default {
 </script>
 
 <template>
-  <pre>{{ insult }}</pre>
+  <pre>{{ insult.data }}</pre>
 </template>
 
 <style lang="scss" scoped>
