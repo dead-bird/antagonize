@@ -5,12 +5,32 @@ export default {
   data() {
     return {
       modifiers: [],
+      blank: {
+        text: '',
+        nsfw: false,
+      },
     };
   },
 
   methods: {
     async fetch() {
       this.modifiers = await api.get('modifiers');
+    },
+
+    add() {
+      if (!this.blank.text) return;
+
+      console.log('new');
+
+      this.modifiers.push({
+        text: '',
+        nsfw: false,
+      });
+
+      this.blank = {
+        text: '',
+        nsfw: false,
+      };
     },
   },
 
@@ -27,6 +47,10 @@ export default {
     <div v-for="modifier in modifiers.data" :key="modifier._id">
       <router-link :to="modifier._id" append>{{ modifier.text }}</router-link>
     </div>
+
+    <hr>
+
+    <input class="new-todo" v-model="blank" @keyup.enter="add">
 
     <pre>{{ modifiers.data }}</pre>
   </div>
