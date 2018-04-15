@@ -1,23 +1,31 @@
-// const Nouns     = require('../models.js');
-// const mongoose = require('mongoose');
+const Nouns     = require('../models.js');
+const modifiers = require('../models.js');
 const express  = require('express');
 const router   = express.Router();
 
-const eg = [
-  {
-    text: 'stupid idiot',
-    modifier: 'stupid',
-    noun: 'idiot',
-    nsfw: false,
-  },
-];
-
 /* Get An Insult */
 router.get('/', (req, res, next) => {
-  res.send(eg);
-  // Nouns.find((err, nouns) => {
-    // console.log(nouns);
-  // });
+  let modifier = {};
+  let noun = {};
+
+  Modifiers.find((err, modifiers) => {
+    let r = Math.floor(Math.random() * modifiers.length)
+    
+    modifier = modifiers[r];
+  });
+  
+  Nouns.find((err, nouns) => {
+    let r = Math.floor(Math.random() * nouns.length)
+
+    noun = nouns[r];
+  });
+
+  res.send({
+    text: `${modifier.text} ${noun.text}`,
+    modifier: modifier.text,
+    noun: noun.text,
+    nsfw: modifier.nsfw || noun.nsfw,
+  });
 });
 
 module.exports = router;
