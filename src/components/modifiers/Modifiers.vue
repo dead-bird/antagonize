@@ -22,9 +22,9 @@ export default {
 
       console.log('new');
 
-      this.modifiers.push({
-        text: '',
-        nsfw: false,
+      this.modifiers.data.push({
+        text: this.blank.text,
+        nsfw: this.blank.nsfw,
       });
 
       this.blank = {
@@ -44,13 +44,23 @@ export default {
   <div class="container">
     <h1>All Modifiers</h1>
 
-    <div v-for="modifier in modifiers.data" :key="modifier._id">
+    <!-- <div v-for="modifier in modifiers.data" :key="modifier._id">
       <router-link :to="modifier._id" append>{{ modifier.text }}</router-link>
-    </div>
+    </div> -->
 
     <hr>
 
-    <input class="new-todo" v-model="blank" @keyup.enter="add">
+    <div class="form-group">
+      <label for="new">Add Modifier</label>
+      <input class="form-control" name="new" v-model="blank.text" type="text">
+    </div>
+
+    <div class="form-group">
+      <label for="nsfw">NSFW</label>
+      <input class="form-control" name="nsfw" v-model="blank.nsfw" type="radio">
+    </div>
+
+    <button :click="add()" class="btn">Save</button>
 
     <pre>{{ modifiers.data }}</pre>
   </div>
