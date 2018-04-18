@@ -35,9 +35,7 @@ router.get('/:id', (req, res, next) => {
 });
 
 /* Save a Modifier */
-router.post('/:id', (req, res, next) => {
-  res.send('Save a Modifier');
-
+router.post('/', (req, res, next) => {
   Modifiers.create(req.body, (err, post) => {
     if (err) return next(err);
 

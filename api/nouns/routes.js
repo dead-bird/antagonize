@@ -30,7 +30,7 @@ router.get('/:id', (req, res, next) => {
 });
 
 /* Save a Noun */
-router.post('/:id', (req, res, next) => {
+router.post('/', (req, res, next) => {
   res.send('Save a Noun');
   // Nouns.find((err, nouns) => {
     // console.log(nouns);

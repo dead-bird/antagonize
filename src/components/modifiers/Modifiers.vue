@@ -1,7 +1,10 @@
 <script>
 import api from '@/resources/base';
+import Modifier from '@/components/modifiers/Modifier';
 
 export default {
+  components: { Modifier },
+
   data() {
     return {
       modifiers: [],
@@ -20,17 +23,11 @@ export default {
     add() {
       if (!this.blank.text) return;
 
-      console.log('new');
-
-      this.modifiers.data.push({
-        text: this.blank.text,
-        nsfw: this.blank.nsfw,
+      api.post('modifiers', this.blank).then((res) => {
+        this.modifiers.data.push(res.data);
+  
+        this.blank = { text: '', nsfw: false };
       });
-
-      this.blank = {
-        text: '',
-        nsfw: false,
-      };
     },
   },
 
@@ -44,25 +41,33 @@ export default {
   <div class="container">
     <h1>All Modifiers</h1>
 
-    <!-- <div v-for="modifier in modifiers.data" :key="modifier._id">
-      <router-link :to="modifier._id" append>{{ modifier.text }}</router-link>
-    </div> -->
+    <form v-on:submit.prevent="add()">
+      <div class="row justify-content-center">
+        <div class="col-sm-4 form-group">
+          <label for="new">Add Modifier</label>
+          <input class="form-control" name="new" v-model="blank.text" type="text">
+        </div>
+
+        <div class="col-sm-1 form-group">
+          <label for="nsfw">NSFW</label>
+          <input class="form-control" name="nsfw" v-model="blank.nsfw" type="checkbox">
+        </div>
+
+        <div class="col-sm-2 form-group">
+          <button type="submit">Save</button>
+        </div>
+      </div>
+    </form>
+    
+    <pre>{{ blank }}</pre>
 
     <hr>
 
-    <div class="form-group">
-      <label for="new">Add Modifier</label>
-      <input class="form-control" name="new" v-model="blank.text" type="text">
+    <div v-for="mod in modifiers.data" :key="mod._id">
+      <!-- <router-link :to="modifier._id" append>{{ modifier.text }}</router-link> -->
+      <Modifier :modifier="mod" />
     </div>
 
-    <div class="form-group">
-      <label for="nsfw">NSFW</label>
-      <input class="form-control" name="nsfw" v-model="blank.nsfw" type="radio">
-    </div>
-
-    <button :click="add()" class="btn">Save</button>
-
-    <pre>{{ modifiers.data }}</pre>
   </div>
 </template>
 
