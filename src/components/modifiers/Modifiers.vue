@@ -25,7 +25,7 @@ export default {
 
       api.post('modifiers', this.blank).then((res) => {
         this.modifiers.data.push(res.data);
-  
+
         this.blank = { text: '', nsfw: false };
       });
     },
@@ -38,36 +38,32 @@ export default {
 </script>
 
 <template>
-  <div class="container">
-    <h1>All Modifiers</h1>
+  <div>
+    <h1>Modifiers</h1>
 
     <form v-on:submit.prevent="add()">
       <div class="row justify-content-center">
-        <div class="col-sm-4 form-group">
+        <div class="col-sm-6 form-group">
           <label for="new">Add Modifier</label>
           <input class="form-control" name="new" v-model="blank.text" type="text">
         </div>
 
-        <div class="col-sm-1 form-group">
+        <div class="col-sm-3 form-group">
           <label for="nsfw">NSFW</label>
           <input class="form-control" name="nsfw" v-model="blank.nsfw" type="checkbox">
         </div>
 
-        <div class="col-sm-2 form-group">
+        <div class="col-sm-3 form-group">
           <button type="submit">Save</button>
         </div>
       </div>
     </form>
-    
-    <pre>{{ blank }}</pre>
 
     <hr>
 
     <div v-for="mod in modifiers.data" :key="mod._id">
-      <!-- <router-link :to="modifier._id" append>{{ modifier.text }}</router-link> -->
       <Modifier :modifier="mod" />
     </div>
-
   </div>
 </template>
 
