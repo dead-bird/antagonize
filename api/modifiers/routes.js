@@ -27,36 +27,38 @@ router.get('/', (req, res, next) => {
 
 /* Get a Modifier by ID */
 router.get('/:id', (req, res, next) => {
-  Modifiers.findById(req.params.id, (err, post) => {
+  Modifiers.findById(req.params.id, (err, modifier) => {
     if (err) return next(err);
 
-    res.json(post);
+    res.json(modifier);
   });
 });
 
-/* Save a Modifier */
+/* Create a Modifier */
 router.post('/', (req, res, next) => {
-  Modifiers.create(req.body, (err, post) => {
+  Modifiers.create(req.body, (err, modifier) => {
     if (err) return next(err);
 
-    res.json(post);
+    res.json(modifier);
   });
 });
 
 /* Update a Modifier */
 router.put('/:id', (req, res, next) => {
-  res.send('Update a Modifier');
-  // Modifiers.find((err, modifiers) => {
-  //   console.log(modifiers);
-  // });
+  Modifiers.findByIdAndUpdate(req.params.id, req.body, {upsert:true}, (err, modifier) => {
+    if (err) return res.send(500, { error: err });
+
+    return res.json(modifier);
+  });
 });
 
 /* Delete a Modifier */
 router.delete('/:id', (req, res, next) => {
-  res.send('Delete a Modifier');
-  // Modifiers.find((err, modifiers) => {
-  //   console.log(modifiers);
-  // });
+  Modifiers.remove({ _id: req.params.id }, (err, modifier) => {
+    if (err) return res.send(500, { error: err });
+
+    return res.json(modifier);
+  });
 });
 
 module.exports = router;
