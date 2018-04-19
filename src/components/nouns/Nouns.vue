@@ -1,16 +1,33 @@
 <script>
 import api from '@/resources/base';
+import Noun from '@/components/nouns/Noun';
 
 export default {
+  components: { Noun },
+
   data() {
     return {
       nouns: [],
+      blank: {
+        text: '',
+        nsfw: false,
+      },
     };
   },
 
   methods: {
     async fetch() {
       this.nouns = await api.get('nouns');
+    },
+
+    add() {
+      if (!this.blank.text) return;
+
+      api.post('nouns', this.blank).then((res) => {
+        this.nouns.data.push(res.data);
+
+        this.blank = { text: '', nsfw: false };
+      });
     },
   },
 
@@ -21,14 +38,32 @@ export default {
 </script>
 
 <template>
-  <div class="container">
-    <h1>All Nouns</h1>
+  <div>
+    <h1>Nouns</h1>
 
-    <div v-for="noun in nouns.data" :key="noun._id">
-      <router-link :to="noun._id" append>{{ noun.text }}</router-link>
+    <form v-on:submit.prevent="add()">
+      <div class="row justify-content-center">
+        <div class="col-sm-6 form-group">
+          <label for="new">Add noun</label>
+          <input class="form-control" name="new" v-model="blank.text" type="text">
+        </div>
+
+        <div class="col-sm-3 form-group">
+          <label for="nsfw">NSFW</label>
+          <input class="form-control" name="nsfw" v-model="blank.nsfw" type="checkbox">
+        </div>
+
+        <div class="col-sm-3 form-group">
+          <button type="submit">Save</button>
+        </div>
+      </div>
+    </form>
+
+    <hr>
+
+    <div v-for="mod in nouns.data" :key="mod._id">
+      <Noun :noun="mod" />
     </div>
-
-    <pre>{{ nouns.data }}</pre>
   </div>
 </template>
 
