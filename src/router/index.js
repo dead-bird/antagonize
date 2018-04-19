@@ -6,6 +6,7 @@ import Modifiers from '@/components/modifiers/Modifiers';
 import Modifier from '@/components/modifiers/Modifier';
 import Nouns from '@/components/nouns/Nouns';
 import Noun from '@/components/nouns/Noun';
+import Insults from '@/components/insults/Insults';
 
 Vue.use(Router);
 
@@ -14,6 +15,10 @@ export default new Router({
     {
       path: '/',
       component: Home,
+    },
+    {
+      path: '/insults',
+      component: Insults,
     },
 
     {
