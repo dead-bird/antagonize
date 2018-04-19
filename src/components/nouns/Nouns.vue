@@ -41,7 +41,7 @@ export default {
   <div>
     <h1>Nouns</h1>
 
-    <form v-on:submit.prevent="add()">
+    <form v-on:submit.prevent="add()" class="push-bottom">
       <div class="row justify-content-center">
         <div class="col-sm-6 form-group">
           <label for="new">Add noun</label>
@@ -59,10 +59,8 @@ export default {
       </div>
     </form>
 
-    <hr>
-
     <div v-for="mod in nouns.data" :key="mod._id">
-      <Noun :noun="mod" />
+      <Noun :noun="mod" class="push-bottom" />
     </div>
   </div>
 </template>
