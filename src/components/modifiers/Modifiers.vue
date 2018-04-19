@@ -1,9 +1,10 @@
 <script>
 import api from '@/resources/base';
 import Modifier from '@/components/modifiers/Modifier';
+import Check from '@/components/inputs/Check';
 
 export default {
-  components: { Modifier },
+  components: { Modifier, Check },
 
   data() {
     return {
@@ -29,6 +30,10 @@ export default {
         this.blank = { text: '', nsfw: false };
       });
     },
+
+    nsfw() {
+      this.blank.nsfw = !this.blank.nsfw;
+    },
   },
 
   created() {
@@ -48,9 +53,8 @@ export default {
           <input class="form-control" name="new" v-model="blank.text" type="text">
         </div>
 
-        <div class="col-sm-3 form-group">
-          <label for="nsfw">NSFW</label>
-          <input class="form-control" name="nsfw" v-model="blank.nsfw" type="checkbox">
+        <div class="col-sm-3">
+          <Check :nsfw="blank.nsfw" v-on:nsfw="nsfw" />
         </div>
 
         <div class="col-sm-3 form-group">
