@@ -1,9 +1,12 @@
 <script>
 import api from '@/resources/base';
 import Noun from '@/components/nouns/Noun';
+import Check from '@/components/inputs/Check';
+import Tick from '@/components/inputs/Tick';
+import TextInput from '@/components/inputs/Text';
 
 export default {
-  components: { Noun },
+  components: { Noun, Check, TextInput, Tick },
 
   data() {
     return {
@@ -26,8 +29,20 @@ export default {
       api.post('nouns', this.blank).then(res => {
         this.nouns.data.push(res.data);
 
-        this.blank = { text: '', nsfw: false };
+        this.cancel();
       });
+    },
+
+    change(event) {
+      this.blank.text = event;
+    },
+
+    cancel() {
+      this.blank = { text: '', nsfw: false };
+    },
+
+    nsfw() {
+      this.blank.nsfw = !this.blank.nsfw;
     },
   },
 
@@ -41,23 +56,19 @@ export default {
   <div>
     <h1>Nouns</h1>
 
-    <form v-on:submit.prevent="add()" class="push-bottom">
-      <div class="row justify-content-center">
-        <div class="col-sm-6 form-group">
-          <label for="new">Add noun</label>
-          <input class="form-control" name="new" v-model="blank.text" type="text">
-        </div>
-
-        <div class="col-sm-3 form-group">
-          <label for="nsfw">NSFW</label>
-          <input class="form-control" name="nsfw" v-model="blank.nsfw" type="checkbox">
-        </div>
-
-        <div class="col-sm-3 form-group">
-          <button type="submit">Save</button>
-        </div>
+    <div class="row align-items-center push-bottom">
+      <div class="col-sm-8">
+        <TextInput :text="blank.text" @change="change" @cancel="cancel" />
       </div>
-    </form>
+
+      <div class="col-sm-2 text-center">
+        <Check :nsfw="blank.nsfw" v-on:nsfw="nsfw" />
+      </div>
+
+      <div class="col-sm-2 text-center">
+        <Tick @save="add" />
+      </div>
+    </div>
 
     <div v-for="mod in nouns.data" :key="mod._id">
       <Noun :noun="mod" class="push-bottom" />
