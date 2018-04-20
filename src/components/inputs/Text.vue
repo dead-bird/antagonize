@@ -4,34 +4,30 @@ export default {
 
   data() {
     return {
-      thing: false,
+      mode: false,
     };
   },
 
   methods: {
     edit() {
-      this.thing = 'edit';
-
+      this.mode = 'edit';
       this.$emit('edit');
     },
 
     cancel() {
-      this.thing = false;
-      this.$refs.input.blur();
-
+      this.mode = false;
+      this.$refs.text.blur();
       this.$emit('cancel');
     },
 
     save() {
-      this.thing = 'save';
-      this.$refs.input.blur();
-
+      this.mode = 'save';
+      this.$refs.text.blur();
       this.$emit('save');
     },
 
     remove() {
-      this.thing = false;
-
+      this.mode = false;
       this.$emit('remove');
     },
   },
@@ -39,17 +35,14 @@ export default {
 </script>
 
 <template>
-  <div>
-<!-- <input
-    ref="input"
+  <input
+    ref="text"
     type="text"
-    :class="thing"
+    :class="mode"
     v-model="text"
     @focus="edit"
     @keyup.enter="save"
-    @keyup.esc="cancel"> -->
-    <pre>{{ text }}</pre>
-  </div>
+    @keyup.esc="cancel">
 </template>
 
 <style scoped>

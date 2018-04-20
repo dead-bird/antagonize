@@ -2,15 +2,15 @@
 import api from '@/resources/base';
 import Check from '@/components/inputs/Check';
 import Cross from '@/components/inputs/Cross';
+import TextInput from '@/components/inputs/Text';
 
 export default {
-  components: { Check, Cross },
+  components: { Check, Cross, TextInput },
 
   props: ['modifier'],
 
   data() {
     return {
-      thing: false,
       current: {
         text: '',
         nsfw: null,
@@ -21,42 +21,30 @@ export default {
 
   methods: {
     edit() {
-      this.thing = 'edit';
       this.current.text = this.modifier.text;
       this.current.nsfw = this.modifier.nsfw;
     },
 
     cancel() {
-      this.thing = false;
       this.modifier.text = this.current.text;
       this.modifier.nsfw = this.current.nsfw;
-      this.$refs.mod.blur();
     },
 
     save() {
-      this.thing = 'save';
-      this.$refs.mod.blur();
-
       api.put(`modifiers/${this.modifier._id}`, this.modifier).then(() => {
-        const self = this;
-
-        setTimeout(() => {
-          self.thing = false;
-        }, 3000);
+        console.log('save');
       });
     },
 
     remove() {
       api.delete(`modifiers/${this.modifier._id}`).then(() => {
-        this.thing = false;
-
+        console.log('del');
         // remove from list
       });
     },
 
     nsfw() {
       this.modifier.nsfw = !this.modifier.nsfw;
-
       this.save(); // bad?
     },
   },
@@ -66,9 +54,7 @@ export default {
 <template>
   <div class="row align-items-center">
     <div class="col-sm-8">
-      <input ref="mod" class="modifier" type="text"
-        :class="thing" v-model="modifier.text" @focus="edit"
-        @keyup.enter="save" @keyup.esc="cancel">
+      <TextInput :text="modifier.text" v-on:edit="edit" v-on:save="save" v-on:cancel="cancel" />
     </div>
 
     <div class="col-sm-2 text-center">
@@ -82,27 +68,4 @@ export default {
 </template>
 
 <style scoped>
-.modifier {
-  width: 100%;
-  display: block;
-  background-color: transparent;
-  color: inherit;
-  border: none;
-  font-size: 22px;
-  border-bottom: 1px solid transparent;
-  padding: 10px;
-  transition: border-color .3s ease-out;
-}
-
-.modifier:hover, .modifier:active, .modifier:focus {
-  outline: none;
-  border-color: white;
-}
-
-.modifier.edit {
-  border-color: coral;
-}
-.modifier.save {
-  border-color: lightgreen;
-}
 </style>
