@@ -25,6 +25,10 @@ export default {
       this.current.nsfw = this.modifier.nsfw;
     },
 
+    change(event) {
+      this.modifier.text = event;
+    },
+
     cancel() {
       this.modifier.text = this.current.text;
       this.modifier.nsfw = this.current.nsfw;
@@ -54,7 +58,7 @@ export default {
 <template>
   <div class="row align-items-center">
     <div class="col-sm-8">
-      <TextInput :text="modifier.text" v-on:edit="edit" v-on:save="save" v-on:cancel="cancel" />
+      <TextInput :text="modifier.text" @edit="edit" @change="change" @save="save" @cancel="cancel" />
     </div>
 
     <div class="col-sm-2 text-center">

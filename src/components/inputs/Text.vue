@@ -5,6 +5,7 @@ export default {
   data() {
     return {
       mode: false,
+      thing: this.text,
     };
   },
 
@@ -16,14 +17,18 @@ export default {
 
     cancel() {
       this.mode = false;
-      this.$refs.text.blur();
+      this.$refs.textInput.blur();
       this.$emit('cancel');
+    },
+
+    change() {
+      this.$emit('change', this.thing);
     },
 
     save() {
       this.mode = 'save';
-      this.$refs.text.blur();
-      this.$emit('save');
+      this.$refs.textInput.blur();
+      this.$emit('save', this.thing);
     },
 
     remove() {
@@ -36,10 +41,11 @@ export default {
 
 <template>
   <input
-    ref="text"
+    ref="textInput"
     type="text"
     :class="mode"
-    v-model="text"
+    v-model="thing"
+    @keyup="change"
     @focus="edit"
     @keyup.enter="save"
     @keyup.esc="cancel">
