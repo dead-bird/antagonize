@@ -12,8 +12,8 @@ export default {
         data: {},
       },
 
-      m: 0,
-      n: 0,
+      m: '',
+      n: '',
     };
   },
 
@@ -24,23 +24,41 @@ export default {
     },
 
     next() {
-      this.m = Math.floor(Math.random() * this.modifiers.data.length);
-      this.n = Math.floor(Math.random() * this.nouns.data.length);
+      this.m = this.modifiers.data[Math.floor(Math.random() * this.modifiers.data.length)]._id;
+      this.n = this.nouns.data[Math.floor(Math.random() * this.nouns.data.length)]._id;
     },
   },
 
   created() {
     this.fetch();
 
-    setInterval(this.next, 5000);
+    setInterval(this.next, 1000);
   },
 };
 </script>
 
 <template>
-  <h1>you {{ modifiers.data[m].text }} {{ nouns.data[n].text }}</h1>
+  <h1>
+    you
+    <transition-group name="fade">
+      <span v-for="modifier in modifiers.data" v-if="modifier._id === m" :key="modifier._id">
+        {{ modifier.text }}
+      </span>
+    </transition-group>
+
+    <transition-group name="fade">
+      <span v-for="noun in nouns.data" v-show="noun._id === n" :key="noun._id">
+        {{ noun.text }}
+      </span>
+    </transition-group>
+  </h1>
 </template>
 
-<style lang="scss" scoped>
-
+<style scoped>
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
 </style>
