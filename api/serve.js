@@ -26,7 +26,7 @@ app.use(bodyParser.urlencoded({'extended':'false'}));
 
 app.use('/modifiers', modifiers);
 app.use('/nouns', nouns);
-// app.use('/insult', insult);
+app.use('/insult', insult);
 
 app.listen(3000, () => console.log('Example app listening on port 3000!'));
 

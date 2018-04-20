@@ -1,31 +1,29 @@
-// const Nouns     = require('../models.js');
-// const modifiers = require('../models.js');
-// const express  = require('express');
-// const router   = express.Router();
+const Nouns     = require('../nouns/model.js');
+const Modifiers = require('../modifiers/model.js');
+const express  = require('express');
+const router   = express.Router();
 
-// /* Get An Insult */
-// router.get('/', (req, res, next) => {
-//   let modifier = {};
-//   let noun = {};
+/* Get An Insult */
+router.get('/', (req, res, next) => {
+  let modifier = {};
+  let noun = {};
 
-//   Modifiers.find((err, modifiers) => {
-//     let r = Math.floor(Math.random() * modifiers.length)
-    
-//     modifier = modifiers[r];
-//   });
+  Promise.all([
+    Modifiers.find(),
+    Nouns.find(),
+  ])
   
-//   Nouns.find((err, nouns) => {
-//     let r = Math.floor(Math.random() * nouns.length)
+  .then(([ modifiers, nouns ]) => {
+    modifier = modifiers[Math.floor(Math.random() * modifiers.length)];
+    noun = nouns[Math.floor(Math.random() * nouns.length)];
 
-//     noun = nouns[r];
-//   });
+    res.json({
+      text: `${modifier.text} ${noun.text}`,
+      modifier: modifier.text,
+      noun: noun.text,
+      nsfw: modifier.nsfw || noun.nsfw,
+    });
+  });
+});
 
-//   res.send({
-//     text: `${modifier.text} ${noun.text}`,
-//     modifier: modifier.text,
-//     noun: noun.text,
-//     nsfw: modifier.nsfw || noun.nsfw,
-//   });
-// });
-
-// module.exports = router;
+module.exports = router;

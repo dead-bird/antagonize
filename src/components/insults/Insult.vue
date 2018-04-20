@@ -4,7 +4,9 @@ import api from '@/resources/base';
 export default {
   data() {
     return {
-      insult: {},
+      insult: {
+        data: {},
+      },
     };
   },
 
@@ -21,7 +23,7 @@ export default {
 </script>
 
 <template>
-  <pre>{{ insult.data }}</pre>
+  <h1>you {{ insult.data.text }}</h1>
 </template>
 
 <style lang="scss" scoped>
