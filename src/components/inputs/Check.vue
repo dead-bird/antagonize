@@ -16,7 +16,7 @@ export default {
   cursor: pointer;
   line-height: 1;
   margin-bottom: 0;
-  opacity: .25;
+  opacity: .1;
   transition: .3s opacity;
   padding-top: 6px;
 }
