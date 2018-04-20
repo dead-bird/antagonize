@@ -23,7 +23,7 @@ export default {
     add() {
       if (!this.blank.text) return;
 
-      api.post('nouns', this.blank).then((res) => {
+      api.post('nouns', this.blank).then(res => {
         this.nouns.data.push(res.data);
 
         this.blank = { text: '', nsfw: false };

@@ -1,6 +1,4 @@
 <script>
-/* eslint no-underscore-dangle: ["error", { "allow": ["_id"] }] */
-
 import api from '@/resources/base';
 import Check from '@/components/inputs/Check';
 import Cross from '@/components/inputs/Cross';

@@ -24,7 +24,7 @@ export default {
     add() {
       if (!this.blank.text) return;
 
-      api.post('modifiers', this.blank).then((res) => {
+      api.post('modifiers', this.blank).then(res => {
         this.modifiers.data.push(res.data);
 
         this.blank = { text: '', nsfw: false };
