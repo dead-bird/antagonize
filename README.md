@@ -2,6 +2,29 @@
 
 > A Vue.js project
 
+## Prerequisites
+
+``` bash
+# install dependencies
+npm i
+```
+[**Install MongoDB**](https://docs.mongodb.com/manual/installation/)
+
+[**Create MongoDB dirs and permissions**](https://stackoverflow.com/questions/28987347/setting-read-write-permissions-on-mongodb-folder)
+
+
+## Dev Workflow
+
+``` bash
+# start Webpack
+npm run dev
+
+# start MongoDB
+mongod
+
+# start API
+npm run api
+```
 ## Build Setup
 
 ``` bash
