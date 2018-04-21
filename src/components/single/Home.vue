@@ -3,6 +3,12 @@ import Insult from '@/components/insults/Insult';
 
 export default {
   components: { Insult },
+
+  data() {
+    return {
+      api: `${process.env.API}insult`,
+    };
+  },
 };
 </script>
 
@@ -17,6 +23,27 @@ export default {
     </div>
 
     <Insult />
+
+    <h2>API Endpoint</h2>
+    <pre>{{ api }}</pre>
+    Example
+
+    <pre>
+fetch('{{ api }}').then(function (res) {
+  return res.json();
+});</pre>
+
+    ES6
+    <pre>fetch('{{ api }}').then(res => res.json());</pre>
+
+    Response
+    <pre>
+{
+  text: "actual twat",
+  modifier: "actual",
+  noun: "twat",
+  nsfw: true
+}</pre>
   </div>
 </template>
 
