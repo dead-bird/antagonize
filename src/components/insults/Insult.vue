@@ -32,7 +32,7 @@ export default {
   created() {
     this.fetch();
 
-    setInterval(this.next, 1000);
+    setInterval(this.next, 5000);
   },
 };
 </script>
@@ -40,13 +40,13 @@ export default {
 <template>
   <h1>
     you
-    <transition-group name="fade">
+    <transition-group name="up" class="wrap">
       <span v-for="modifier in modifiers.data" v-if="modifier._id === m" :key="modifier._id">
         {{ modifier.text }}
       </span>
     </transition-group>
 
-    <transition-group name="fade">
+    <transition-group name="down" class="wrap">
       <span v-for="noun in nouns.data" v-show="noun._id === n" :key="noun._id">
         {{ noun.text }}
       </span>
@@ -55,10 +55,29 @@ export default {
 </template>
 
 <style scoped>
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .5s;
+.wrap {
+  display: inline-block;
+  position: relative;
+  transition: width .3s;
+  width: auto;
+  margin: 0;
 }
-.fade-enter, .fade-leave-to {
+
+.up-enter-active, .up-leave-active {
+  transition: all .5s;
+}
+.up-enter, .up-leave-to {
   opacity: 0;
+  position: absolute;
+  transform: translateY(-100px);
+}
+
+.down-enter-active, .down-leave-active {
+  transition: all .5s;
+}
+.down-enter, .down-leave-to {
+  opacity: 0;
+  position: absolute;
+  transform: translateY(100px);
 }
 </style>
