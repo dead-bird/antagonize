@@ -1,13 +1,34 @@
 <script>
 import Insult from '@/components/insults/Insult';
+import api from '@/resources/base';
 
 export default {
   components: { Insult },
 
   data() {
     return {
-      api: `${process.env.API}insult`,
+      base: `${process.env.API}insult`,
+      options: ['ES6', 'JavaScript', 'cURL'],
+      selected: 'ES6',
+      response: {
+        data: {
+          text: 'actual twat',
+          modifier: 'actual',
+          noun: 'twat',
+          nsfw: true,
+        },
+      },
     };
+  },
+
+  methods: {
+    async fetch() {
+      this.response = await api.get('insult');
+    },
+  },
+
+  created() {
+    this.fetch();
   },
 };
 </script>
@@ -25,25 +46,25 @@ export default {
     <Insult />
 
     <h2>API Endpoint</h2>
-    <pre>{{ api }}</pre>
-    Example
+    <pre>{{ base }}</pre>
 
-    <pre>
-fetch('{{ api }}').then(function (res) {
+    <h2>Example</h2>
+    <select name="example" id="example" v-model="selected">
+      <option v-for="option in options" v-bind:value="option">
+        {{ option }}
+      </option>
+    </select>
+
+<pre v-if="selected === 'cURL'"><code>curl -s -H "Accept: application/json" {{ base }}</code></pre>
+
+<pre v-if="selected === 'JavaScript'"><code>fetch('{{ base }}').then(function (res) {
   return res.json();
-});</pre>
+});</code></pre>
 
-    ES6
-    <pre>fetch('{{ api }}').then(res => res.json());</pre>
+<pre v-if="selected === 'ES6'"><code>fetch('{{ base }}').then(res => res.json());</code></pre>
 
-    Response
-    <pre>
-{
-  text: "actual twat",
-  modifier: "actual",
-  noun: "twat",
-  nsfw: true
-}</pre>
+    <h2>Response</h2>
+    <pre><code>{{ response.data }}</code></pre>
   </div>
 </template>
 
