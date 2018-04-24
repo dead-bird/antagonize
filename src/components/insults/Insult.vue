@@ -38,8 +38,7 @@ export default {
 </script>
 
 <template>
-  <h1>
-    you
+  <div class="insult">
     <transition-group name="up" class="wrap">
       <span v-for="modifier in modifiers.data" v-if="modifier._id === m" :key="modifier._id">
         {{ modifier.text }}
@@ -51,10 +50,14 @@ export default {
         {{ noun.text }}
       </span>
     </transition-group>
-  </h1>
+  </div>
 </template>
 
 <style scoped>
+.insult {
+  display: inline-block;
+}
+
 .wrap {
   display: inline-block;
   position: relative;

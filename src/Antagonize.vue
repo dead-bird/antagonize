@@ -8,7 +8,7 @@ export default {
 
 <template>
   <div id="antagonize">
-    <Head />
+    <!-- <Head /> -->
 
     <router-view/>
   </div>

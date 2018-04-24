@@ -34,42 +34,71 @@ export default {
 </script>
 
 <template>
-  <div class="container">
-    <div class="define">
-      <h1>antagonize</h1>
-      <h4>ænˈtæɡəˌnaɪz</h4>
-      verb<br>
-      <strong>to make hostile; annoy or irritate.</strong><br>
-      "His criticism <em>antagonized</em> his friends"
+  <div>
+    <section class="intro">
+      <div class="define">
+        <!-- <h1>antagonize</h1> -->
+        <h4>ænˈtæɡəˌnaɪz</h4>
+        verb<br>
+        <strong>to make hostile; annoy or irritate.</strong><br>
+        "His criticism <em>antagonized</em> his friends"
+      </div>
+
+      <div class="col">
+        <h1>antagonize.</h1>
+        <h3>A public API for getting randomly generated insults.</h3>
+
+        <span>hey you. yeah you. you <Insult />.</span>
+      </div>    
+    </section>
+
+    <div class="container">
+      <h2>API Endpoint</h2>
+      <pre>{{ base }}</pre>
+
+      <h2>Example</h2>
+      <select name="example" id="example" v-model="selected">
+        <option v-for="option in options" v-bind:value="option">
+          {{ option }}
+        </option>
+      </select>
+
+  <pre v-if="selected === 'cURL'"><code>curl -s -H "Accept: application/json" {{ base }}</code></pre>
+
+  <pre v-if="selected === 'JavaScript'"><code>fetch('{{ base }}').then(function (res) {
+    return res.json();
+  });</code></pre>
+
+  <pre v-if="selected === 'ES6'"><code>fetch('{{ base }}').then(res => res.json());</code></pre>
+
+      <h2>Response</h2>
+      <pre><code>{{ response.data }}</code></pre>
     </div>
-
-    <Insult />
-
-    <h2>API Endpoint</h2>
-    <pre>{{ base }}</pre>
-
-    <h2>Example</h2>
-    <select name="example" id="example" v-model="selected">
-      <option v-for="option in options" v-bind:value="option">
-        {{ option }}
-      </option>
-    </select>
-
-<pre v-if="selected === 'cURL'"><code>curl -s -H "Accept: application/json" {{ base }}</code></pre>
-
-<pre v-if="selected === 'JavaScript'"><code>fetch('{{ base }}').then(function (res) {
-  return res.json();
-});</code></pre>
-
-<pre v-if="selected === 'ES6'"><code>fetch('{{ base }}').then(res => res.json());</code></pre>
-
-    <h2>Response</h2>
-    <pre><code>{{ response.data }}</code></pre>
   </div>
 </template>
 
 <style scoped>
-.define {
+h1 {
+  font-size: 100px;
+  font-weight: 900;
+  line-height: 1;
+  margin-bottom: 30px;
+}
+.intro {
+  min-height: 100vh;
+  background-color: #222325;
+  padding-top: 60px;
   margin-bottom: 60px;
+  /* display: flex;
+  align-items: center; */
+}
+
+.define {
+  position: absolute;
+  bottom: 60px;
+  right: 60px;
+  transform: scale(1.5);
+  transform-origin: bottom right;
+  color: #3d3d3e;
 }
 </style>
