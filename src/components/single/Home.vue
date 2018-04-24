@@ -45,10 +45,12 @@ export default {
       </div>
 
       <div class="col">
-        <h1>antagonize.</h1>
-        <h3>A public API for getting randomly generated insults.</h3>
+        <h1>
+          antagonize.
+          <span class="desc">An API for getting randomly generated insults.</span>
+        </h1>
 
-        <span>hey you. yeah you. you <Insult />.</span>
+        <div>hey you. yeah you. you <Insult />.</div>
       </div>    
     </section>
 
@@ -79,11 +81,21 @@ export default {
 
 <style scoped>
 h1 {
-  font-size: 100px;
+  display: inline-block;
+  font-size: 130px;
   font-weight: 900;
   line-height: 1;
   margin-bottom: 30px;
+  position: relative;
 }
+
+.desc {
+  position: absolute;
+  right: 0;
+  bottom: -10px;
+  font-size: 16px;
+}
+
 .intro {
   min-height: 100vh;
   background-color: #222325;
