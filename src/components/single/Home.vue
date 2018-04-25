@@ -44,14 +44,16 @@ export default {
         "His criticism <em>antagonized</em> his friends"
       </div>
 
-      <div class="col">
-        <h1>
-          antagonize.
-          <span class="desc">An API for getting randomly generated insults.</span>
-        </h1>
+      <div class="container">
+        <div class="col">
+          <h1>
+            antagonize.
+            <span class="desc">An API for getting randomly generated insults.</span>
+          </h1>
 
-        <div>hey you. yeah you. you <Insult />.</div>
-      </div>    
+          <div>hey you. yeah you. you <Insult />.</div>
+        </div> 
+      </div>   
     </section>
 
     <div class="container">
@@ -86,12 +88,13 @@ h1 {
   font-weight: 900;
   line-height: 1;
   margin-bottom: 30px;
+  margin-left: -10px;
   position: relative;
 }
 
 .desc {
   position: absolute;
-  right: 0;
+  right: 10px;
   bottom: -10px;
   font-size: 16px;
 }
