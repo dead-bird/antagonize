@@ -42,7 +42,7 @@ export default {
   <div>
     <div class="container">
       <h2>API Endpoint</h2>
-      <pre v-highlightjs><code>{{ base }}</code></pre>
+      <pre v-highlightjs><code class="javascript">'{{ base }}'</code></pre>
 
       <h2>
         <select class="options" name="example" id="example" v-model="selected">
