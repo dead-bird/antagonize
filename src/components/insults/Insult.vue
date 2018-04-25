@@ -12,6 +12,8 @@ export default {
         data: {},
       },
 
+      start: false,
+
       m: '',
       n: '',
     };
@@ -24,6 +26,8 @@ export default {
     },
 
     next() {
+      this.start = true;
+
       let rand = Math.floor(Math.random() * this.modifiers.data.length);
       this.m = this.modifiers.data[rand]._id;
 
@@ -43,15 +47,17 @@ export default {
 <template>
   <div class="insult">
     <transition-group name="up" class="wrap">
-      <span v-for="modifier in modifiers.data" v-if="modifier._id === m" :key="modifier._id">
+      <span v-for="modifier in modifiers.data" v-if="start && modifier._id === m" :key="modifier._id">
         {{ modifier.text }}
       </span>
+      <span v-if="!start" key="start">dumb</span>
     </transition-group>
 
     <transition-group name="down" class="wrap">
-      <span v-for="noun in nouns.data" v-show="noun._id === n" :key="noun._id">
+      <span v-for="noun in nouns.data" v-show="start && noun._id === n" :key="noun._id">
         {{ noun.text }}
       </span>
+      <span v-if="!start" key="start">bastard</span>
     </transition-group>
   </div>
 </template>
