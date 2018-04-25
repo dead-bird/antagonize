@@ -14,7 +14,7 @@ export default {
       <div class="col">
         <h1>
           antagonize.
-          <span class="desc">An API for getting randomly generated insults.</span>
+          <span class="desc">an API for getting randomly generated insults.</span>
         </h1>
 
         <div class="insult">hey you. yeah you. you <Insult />.</div>
