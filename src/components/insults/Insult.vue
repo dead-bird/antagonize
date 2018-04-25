@@ -24,8 +24,11 @@ export default {
     },
 
     next() {
-      this.m = this.modifiers.data[Math.floor(Math.random() * this.modifiers.data.length)]._id;
-      this.n = this.nouns.data[Math.floor(Math.random() * this.nouns.data.length)]._id;
+      let rand = Math.floor(Math.random() * this.modifiers.data.length);
+      this.m = this.modifiers.data[rand]._id;
+
+      rand = Math.floor(Math.random() * this.nouns.data.length);
+      this.n = this.nouns.data[rand]._id;
     },
   },
 
@@ -61,26 +64,39 @@ export default {
 .wrap {
   display: inline-block;
   position: relative;
-  transition: width .3s;
+  transition: width 0.3s;
   width: auto;
   margin: 0;
 }
 
-.up-enter-active, .up-leave-active {
-  transition: all .5s;
-}
-.up-enter, .up-leave-to {
-  opacity: 0;
-  position: absolute;
-  transform: translateY(-100px);
+.up-enter-active {
+  transition: all 0.5s, opacity 1s 0.2s;
 }
 
-.down-enter-active, .down-leave-active {
-  transition: all .5s;
+.up-leave-active {
+  transition: all 0.5s, opacity 1s 0.5s;
 }
-.down-enter, .down-leave-to {
+
+.up-enter,
+.up-leave-to {
   opacity: 0;
   position: absolute;
-  transform: translateY(100px);
+  transform: translateY(-15px) rotateX(60deg);
+}
+
+.down-enter-active {
+  transition: all 0.5s, opacity 1s 0.2s;
+}
+
+.down-leave-active {
+  transition: all 0.5s, opacity 1s 0.5s;
+}
+
+.down-enter,
+.down-leave-to {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  transform: translateY(15px) rotateX(-60deg);
 }
 </style>
