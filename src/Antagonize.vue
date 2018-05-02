@@ -1,15 +1,9 @@
 <script>
-import Head from '@/components/parts/Head';
-
-export default {
-  components: { Head },
-};
+export default {};
 </script>
 
 <template>
   <div id="antagonize">
-    <!-- <Head /> -->
-
     <router-view/>
   </div>
 </template>
