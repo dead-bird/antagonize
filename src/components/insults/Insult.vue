@@ -46,6 +46,8 @@ export default {
 
 <template>
   <div class="insult">
+    hey you. yeah you. you
+
     <transition-group name="up" class="wrap">
       <span v-for="modifier in modifiers.data" v-if="start && modifier._id === m" :key="modifier._id">
         {{ modifier.text }}
@@ -58,13 +60,14 @@ export default {
         {{ noun.text }}
       </span>
       <span v-if="!start" key="start">bastard</span>
-    </transition-group>
+    </transition-group>.
   </div>
 </template>
 
 <style scoped>
 .insult {
-  display: inline-block;
+  font-size: 32px;
+  margin-bottom: 175px;
 }
 
 .wrap {

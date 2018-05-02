@@ -14,12 +14,11 @@ export default {};
 
 <style scoped>
 .define {
-  position: absolute;
-  bottom: 60px;
-  right: 60px;
+  float: right;
+  margin-top: 60px;
+  padding-right: 60px;
   transform: scale(1.5);
-  transform-origin: bottom right;
+  transform-origin: top right;
   color: #595959;
-  z-index: -1;
 }
 </style>
