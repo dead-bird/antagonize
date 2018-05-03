@@ -1,10 +1,10 @@
 <script>
 import api from '@/resources/base';
-import Modifier from '@/components/modifiers/Modifier';
+// import Modifier from '@/components/modifiers/Modifier';
 import Form from '@/components/inputs/Form';
 
 export default {
-  components: { Modifier, Form },
+  components: { Form },
 
   data() {
     return {
@@ -28,10 +28,10 @@ export default {
   <div>
     <h1>Modifiers</h1>
 
-    <Form route="modifiers" />
+    <!-- <Form route="modifiers" /> -->
   
     <div v-for="mod in modifiers.data" :key="mod._id">
-      <Modifier :modifier="mod" class="push-bottom" />
+      <Form :item="mod" route="modifiers" class="push-bottom"  />
     </div>
   </div>
 </template>
