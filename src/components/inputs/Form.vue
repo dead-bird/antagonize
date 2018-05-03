@@ -58,7 +58,7 @@ export default {
   </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 .nsfw {
   display: inline-block;
   user-select: none;
@@ -69,10 +69,10 @@ export default {
   opacity: 0.1;
   transition: 0.3s opacity;
   padding-top: 6px;
-}
 
-.nsfw:hover,
-.nsfw.checked {
-  opacity: 1;
+  &:hover,
+  &.checked {
+    opacity: 1;
+  }
 }
 </style>

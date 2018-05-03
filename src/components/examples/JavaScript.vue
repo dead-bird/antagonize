@@ -16,6 +16,6 @@ export default {
 <pre v-highlightjs="sourcecode"><code class="javascript"></code></pre>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 
 </style>

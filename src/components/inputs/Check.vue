@@ -8,7 +8,7 @@ export default {
   <div class="nsfw" :class="nsfw ? 'checked' : ''" @click="$emit('nsfw')">️️⚠️</div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 .nsfw {
   display: inline-block;
   user-select: none;
@@ -16,12 +16,13 @@ export default {
   cursor: pointer;
   line-height: 1;
   margin-bottom: 0;
-  opacity: .1;
-  transition: .3s opacity;
+  opacity: 0.1;
+  transition: 0.3s opacity;
   padding-top: 6px;
-}
 
-.nsfw:hover, .nsfw.checked {
-  opacity: 1;
+  &:hover,
+  &.checked {
+    opacity: 1;
+  }
 }
 </style>

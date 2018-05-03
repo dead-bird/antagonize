@@ -51,7 +51,7 @@ export default {
     @keyup.esc="cancel">
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 input {
   width: 100%;
   display: block;
@@ -61,18 +61,20 @@ input {
   font-size: 22px;
   border-bottom: 1px solid transparent;
   padding: 10px;
-  transition: border-color .3s ease-out;
-}
+  transition: border-color 0.3s ease-out;
 
-input:hover, input:active, input:focus {
-  outline: none;
-  border-color: white;
-}
+  &:hover,
+  &:active,
+  &:focus {
+    outline: none;
+    border-color: white;
+  }
 
-input.edit {
-  border-color: coral;
-}
-input.save {
-  border-color: lightgreen;
+  &.edit {
+    border-color: coral;
+  }
+  &.save {
+    border-color: lightgreen;
+  }
 }
 </style>

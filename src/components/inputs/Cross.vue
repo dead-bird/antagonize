@@ -1,13 +1,12 @@
 <script>
-export default {
-};
+export default {};
 </script>
 
 <template>
   <div class="delete" @click="$emit('remove')">❌</div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 .delete {
   display: inline-block;
   user-select: none;

@@ -9,7 +9,7 @@ export default {};
   </h1>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 h1 {
   display: inline-block;
   font-size: 130px;

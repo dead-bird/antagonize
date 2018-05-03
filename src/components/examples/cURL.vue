@@ -14,6 +14,6 @@ export default {
   <pre v-highlightjs="sourcecode"><code class="php"></code></pre>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 
 </style>

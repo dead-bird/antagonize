@@ -64,7 +64,7 @@ export default {
   </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 .insult {
   font-size: 32px;
   margin-bottom: 175px;

@@ -23,7 +23,7 @@ export default {
   </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 .line {
   width: 1px;
   height: 100%;

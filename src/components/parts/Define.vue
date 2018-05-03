@@ -12,7 +12,7 @@ export default {};
   </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 .define {
   float: right;
   margin-top: 60px;
