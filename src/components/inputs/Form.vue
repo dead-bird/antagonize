@@ -1,65 +1,101 @@
 <script>
-// import api from '@/resources/base';
+import api from '@/resources/base';
 // import Check from '@/components/inputs/Check';
 // import Tick from '@/components/inputs/Tick';
 // import TextInput from '@/components/inputs/Text';
 
 export default {
-  props: ['route', 'item'],
+  props: ['route', 'pass'],
 
   // components: { Check, TextInput, Tick },
 
   data() {
     return {
-      mode: false,
-      // item: {
-      //   text: '',
-      //   nsfw: false,
-      // },
+      mode: false, // save, saved, edit, cancel
+      backup: {},
+      item: this.pass,
     };
   },
 
   methods: {
-    save() {
-      console.log('save');
-
-      if (!this.item.text) return;
-
-      // api.post(this.route, this.item).then(res => {
-      // this.modifiers.data.push(res.data); // emit event probably
-
-      this.cancel();
-      // });
-    },
-
-    cancel() {
-      // this.item = { text: '', nsfw: false };
+    edit() {
+      this.backup = Object.assign({}, this.item);
+      this.mode = 'edit';
+      this.$refs.text.readOnly = false;
     },
 
     nsfw() {
       this.item.nsfw = !this.item.nsfw;
+    },
+
+    cancel() {
+      this.mode = 'cancel';
+      this.item = this.backup;
+      this.reset();
+    },
+
+    save() {
+      if (!this.item.text) return;
+
+      this.mode = 'save';
+
+      api.put(this.path, this.item).then(() => {
+        this.reset();
+      });
+    },
+
+    remove() {
+      this.mode = 'delete';
+
+      if (confirm(`Are you sure you want to delete '${this.item.text}'`)) {
+        api.delete(this.path).then(() => {
+          this.reset(0);
+        });
+      }
+    },
+
+    reset(dur = 2000) {
+      const self = this;
+
+      this.$refs.text.readOnly = true;
+
+      setTimeout(() => {
+        console.log('reset');
+
+        self.mode = false;
+        self.backup = {};
+      }, dur);
+    },
+  },
+
+  computed: {
+    path() {
+      return `${this.route}/${this.item._id}`;
     },
   },
 };
 </script>
 
 <template>
-  <div class="row align-items-center push-bottom">
+  <div class="row align-items-center push-bottom form" :class="`state-${mode}`">
     <div class="col-sm-8">
       <input
         class="text"
-        ref="textInput"
+        ref="text"
         type="text"
         v-model="item.text"
-        @keyup.esc="cancel()">
+        @keyup.esc="cancel()"
+        @dblclick="edit"
+        readonly>
     </div>
 
     <div class="col-sm-2 text-center">
-      <div class="nsfw" :class="item.nsfw ? 'checked' : ''" @click="nsfw()">️️⚠️</div>
+      <div class="nsfw" :class="item.nsfw ? 'checked' : ''" @click="mode === 'edit' ? nsfw() : null">️️⚠️</div>
     </div>
 
     <div class="col-sm-2 text-center">
-      <div class="save" @click="save()">save</div>
+      <div class="action" v-if="mode === 'edit'" @click="mode === 'edit' ? save() : null">save</div>
+      <div class="action delete" v-else @click="remove()">x</div>
     </div>
   </div>
 </template>
@@ -75,18 +111,26 @@ export default {
   border-bottom: 1px solid transparent;
   padding: 10px;
   transition: border-color 0.3s ease-out;
+  user-select: none;
 
   &:hover,
   &:active,
   &:focus {
     outline: none;
-    border-color: white;
+    // border-color: white;
   }
 
-  &.edit {
+  .state-edit & {
+    user-select: all;
+    border-color: lightblue;
+  }
+  .state-cancel & {
     border-color: coral;
   }
-  &.save {
+  .state-delete & {
+    border-color: tomato;
+  }
+  .state-save & {
     border-color: lightgreen;
   }
 }
@@ -95,20 +139,26 @@ export default {
   display: inline-block;
   user-select: none;
   font-size: 32px;
-  cursor: pointer;
   line-height: 1;
   margin-bottom: 0;
   opacity: 0.1;
   transition: 0.3s opacity;
   padding-top: 6px;
 
-  &:hover,
   &.checked {
     opacity: 1;
   }
+
+  .state-edit & {
+    cursor: pointer;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
 }
 
-.save {
+.action {
   display: inline-block;
   user-select: none;
   font-size: 20px;
@@ -116,5 +166,14 @@ export default {
   line-height: 1;
   margin-bottom: 0;
   padding-top: 1px;
+
+  &.delete {
+    opacity: 0;
+    transition: opacity 0.2s;
+
+    .form:hover & {
+      opacity: 1;
+    }
+  }
 }
 </style>
