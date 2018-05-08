@@ -1,20 +1,21 @@
 <script>
 import api from '@/resources/base';
-// import Modifier from '@/components/modifiers/Modifier';
 import Form from '@/components/inputs/Form';
 
 export default {
+  props: ['route'],
+
   components: { Form },
 
   data() {
     return {
-      modifiers: [],
+      results: [],
     };
   },
 
   methods: {
     async fetch() {
-      this.modifiers = await api.get('modifiers');
+      this.results = await api.get(this.route);
     },
   },
 
@@ -26,16 +27,16 @@ export default {
 
 <template>
   <div>
-    <h1>Modifiers</h1>
-
-    <!-- <Form route="modifiers" /> -->
+    <h1>{{ route }}</h1>
   
-    <div v-for="mod in modifiers.data" :key="mod._id">
-      <Form :item="mod" route="modifiers" class="push-bottom"  />
+    <div v-for="item in results.data" :key="item._id">
+      <Form :pass="item" :route="route" class="push-bottom" />
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
-
+h1 {
+  text-transform: capitalize;
+}
 </style>

@@ -1,23 +1,22 @@
 <script>
-import Modifiers from '@/components/modifiers/Modifiers';
-import Nouns from '@/components/nouns/Nouns';
+import List from '@/components/parts/List';
 
 export default {
-  components: { Modifiers, Nouns },
+  components: { List },
 };
 </script>
 
 <template>
   <div class="container">
-    <div class="row">
-      <div class="col-sm-5">
-        <Modifiers />
+    <div class="row justify-content-center">
+      <div class="col-sm-4">
+        <List route="modifiers" />
       </div>
 
       <div class="col-sm-1 text-center"><div class="line"></div></div>
 
-      <div class="col-sm-5">
-        <Nouns />
+      <div class="col-sm-4">
+        <List route="nouns" />
       </div>
     </div>
   </div>
