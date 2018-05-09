@@ -90,6 +90,10 @@ export default {
         @keyup.esc="cancel()"
         @dblclick="edit"
         readonly>
+
+        <div class="detail">
+          <span>added</span> <span>by</span> <span>[name]</span> <span>on</span> <span>[date].</span>
+        </div>
     </div>
 
     <div class="col-sm-2 text-center">
@@ -104,6 +108,10 @@ export default {
 </template>
 
 <style lang="scss" scoped>
+.form {
+  position: relative;
+}
+
 .text {
   width: 100%;
   display: block;
@@ -177,6 +185,25 @@ export default {
 
     .form:hover & {
       opacity: 1;
+    }
+  }
+}
+
+.detail {
+  position: absolute;
+  left: 15px;
+  bottom: -20px;
+  opacity: 0;
+  transition: opacity  .3s;
+  font-size: 12px;
+
+  .state-edit & {
+    opacity: 1;
+  }
+
+  @for $i from 1 through 10 {
+    span:nth-of-type($i) {
+      transition-delay: 0.1 * $i;
     }
   }
 }
