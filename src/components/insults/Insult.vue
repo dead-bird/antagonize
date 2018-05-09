@@ -67,7 +67,11 @@ export default {
 <style lang="scss" scoped>
 .insult {
   font-size: 32px;
-  margin-bottom: 175px;
+  margin-bottom: 15vh;
+
+  @media (min-width: 1200px) {
+    margin-bottom: 10vh;
+  }
 }
 
 .wrap {

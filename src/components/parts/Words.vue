@@ -15,9 +15,13 @@ h1 {
   font-size: 130px;
   font-weight: 900;
   line-height: 1;
-  margin-bottom: 150px;
+  margin-bottom: 10vh;
   margin-left: -10px;
   position: relative;
+
+  @media (min-width: 1200px) {
+    margin-bottom: 7.5vh;
+  }
 }
 
 .desc {

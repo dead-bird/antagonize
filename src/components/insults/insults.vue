@@ -9,13 +9,13 @@ export default {
 <template>
   <div class="container">
     <div class="row justify-content-center">
-      <div class="col-sm-4">
+      <div class="col col-lg-4">
         <List route="modifiers" />
       </div>
 
-      <div class="col-sm-1 text-center"><div class="line"></div></div>
+      <div class="col-1 text-center"><div class="line"></div></div>
 
-      <div class="col-sm-4">
+      <div class="col col-lg-4">
         <List route="nouns" />
       </div>
     </div>

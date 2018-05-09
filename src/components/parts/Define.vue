@@ -15,7 +15,7 @@ export default {};
 <style lang="scss" scoped>
 .define {
   float: right;
-  margin-top: 60px;
+  margin: 60px 0;
   padding-right: 60px;
   transform: scale(1.5);
   transform-origin: top right;
