@@ -11,7 +11,7 @@ export default {
 
   data() {
     return {
-      mode: false, // save, saved, edit, cancel
+      mode: false, // save, edit, cancel, delete
       backup: {},
       item: this.pass,
     };
@@ -49,8 +49,11 @@ export default {
 
       if (confirm(`Are you sure you want to delete '${this.item.text}'`)) {
         api.delete(this.path).then(() => {
+          console.log('deleted - need to $emit to tell parent to remove from list');
           this.reset(0);
         });
+      } else {
+        this.reset(0);
       }
     },
 
@@ -112,6 +115,7 @@ export default {
   padding: 10px;
   transition: border-color 0.3s ease-out;
   user-select: none;
+  cursor: initial;
 
   &:hover,
   &:active,
