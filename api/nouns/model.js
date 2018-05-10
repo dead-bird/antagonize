@@ -4,6 +4,7 @@ let schema = new mongoose.Schema(
   {
     text: String,
     nsfw: Boolean,
+    author: String,
     date: { type: Date, default: Date.now },
   },
   { versionKey: false }
