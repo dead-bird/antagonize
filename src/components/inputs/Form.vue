@@ -1,5 +1,6 @@
 <script>
 import api from '@/resources/base';
+import Detail from '@/components/inputs/Detail';
 // import Check from '@/components/inputs/Check';
 // import Tick from '@/components/inputs/Tick';
 // import TextInput from '@/components/inputs/Text';
@@ -7,6 +8,7 @@ import api from '@/resources/base';
 export default {
   props: ['route', 'pass'],
 
+  components: { Detail },
   // components: { Check, TextInput, Tick },
 
   data() {
@@ -91,9 +93,7 @@ export default {
         @dblclick="edit"
         readonly>
 
-        <div class="detail">
-          <span>added</span> <span>by</span> <span>[name]</span> <span>on</span> <span>[date].</span>
-        </div>
+        <Detail :item="item" />
     </div>
 
     <div class="col-sm-2 text-center">
@@ -185,25 +185,6 @@ export default {
 
     .form:hover & {
       opacity: 1;
-    }
-  }
-}
-
-.detail {
-  position: absolute;
-  left: 15px;
-  bottom: -20px;
-  opacity: 0;
-  transition: opacity  .3s;
-  font-size: 12px;
-
-  .state-edit & {
-    opacity: 1;
-  }
-
-  @for $i from 1 through 10 {
-    span:nth-of-type($i) {
-      transition-delay: 0.1 * $i;
     }
   }
 }
