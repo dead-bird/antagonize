@@ -4,8 +4,10 @@ import Insult from '@/components/insults/Insult';
 import Example from '@/components/examples/Example';
 import Define from '@/components/parts/Define';
 
+import Test from '@/components/auth/test';
+
 export default {
-  components: { Words, Insult, Example, Define },
+  components: { Words, Insult, Example, Define, Test },
 };
 </script>
 
@@ -20,6 +22,8 @@ export default {
 
       <Example />
     </div>
+
+    <Test />
 
     <Define />
   </section>
