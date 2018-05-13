@@ -1,28 +1,33 @@
-const Nouns = require('./model.js');
+const Users   = require('./model.js');
 const express = require('express');
-const router = express.Router();
-const bcrypt = require('bcrypt');
-const salt = 10;
+const bcrypt  = require('bcrypt');
+const router  = express.Router();
+const salt    = 10;
 
-const pass = 'test';
+/* Create new User */
+router.post('/', (req, res, next) => {
+  bcrypt.hash(req.body.password, salt, (err, hash) => {
+    let user = { username: req.body.username, password: hash };
 
-// bcrypt.hash(pass, salt, (err, hash) => {
-//   console.log(pass);
-//   console.log(hash);
-// });
-
-// Load hash from your password DB.
-// bcrypt.compare(myPlaintextPassword, hash, (err, res) => {
-//   // res == true
-// });
-
-router.get('/auth', (req, res, next) => {
-  Nouns.find({ username: { $eq: req.params.username } }, (err, user) => {
-    if (err) return next(err);
-
-    res.json(user);
+    Users.create(user, (err, user) => {
+      if (err) return next(err);
+  
+      res.json(user);
+    });
   });
 });
 
+/* Login */ 
+router.post('/auth', (req, res, next) => {
+  Users.findOne({ username: { $eq: req.body.username } }, (err, user) => {
+    if (err) return next(err);
 
-// module.exports = router;
+    bcrypt.compare(req.body.password, user.password, (err, match) => {
+      let ret = match ? user : false;
+
+      res.json(ret);
+    });
+  });
+});
+
+module.exports = router;
