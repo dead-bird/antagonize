@@ -1,11 +1,6 @@
-const Nouns = require('./model.js');
-const express   = require('express');
-const router    = express.Router();
-
-const test = {
-  text: 'test data',
-  nsfw: false,
-}
+const Nouns   = require('./model.js');
+const express = require('express');
+const router  = express.Router();
 
 /* Get All Nouns */
 router.get('/', (req, res, next) => {
