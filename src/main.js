@@ -5,6 +5,7 @@ import VueHighlightJS from 'vue-highlightjs';
 import Moment from 'vue-moment';
 import Antagonize from './Antagonize';
 import router from './router';
+import store from './store';
 
 Vue.use(VueHighlightJS);
 Vue.use(Moment);
@@ -15,6 +16,7 @@ Vue.config.productionTip = false;
 new Vue({
   el: '#antagonize',
   router,
+  store,
   components: { Antagonize },
   template: '<Antagonize />',
 });
