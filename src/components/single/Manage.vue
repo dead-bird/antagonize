@@ -3,6 +3,14 @@ import List from '@/components/parts/List';
 
 export default {
   components: { List },
+
+  beforeCreate() {
+    if (!this.$store.state.auth.loggedIn) {
+      console.log('not logged in');
+
+      this.$router.push('/login');
+    }
+  },
 };
 </script>
 

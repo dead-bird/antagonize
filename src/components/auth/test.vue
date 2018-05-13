@@ -5,7 +5,7 @@ export default {
   methods: {
     async fetch() {
       console.log('fetch');
-      this.user = await api.post('users/auth', {username: 'dave', password: 'test'});
+      this.user = await api.post('users/auth', { username: 'dave', password: 'test' });
     },
   },
 };
