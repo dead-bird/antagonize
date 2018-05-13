@@ -4,6 +4,7 @@ const app = express();
 const modifiers = require('./modifiers/routes')
 const nouns = require('./nouns/routes')
 const insult = require('./insults/routes')
+const users = require('./users/routes')
 const bodyParser = require('body-parser');
 
 mongoose.connect('mongodb://127.0.0.1/antagonize');
@@ -27,6 +28,7 @@ app.use(bodyParser.urlencoded({'extended':'false'}));
 app.use('/modifiers', modifiers);
 app.use('/nouns', nouns);
 app.use('/insult', insult);
+app.use('/users', users);
 
 app.listen(3000, () => console.log('Example app listening on port 3000!'));
 
