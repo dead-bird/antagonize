@@ -17,7 +17,7 @@ export default {
     },
     change(el) {
       this.$refs[el].classList.add('change');
-    }
+    },
   },
 };
 </script>
