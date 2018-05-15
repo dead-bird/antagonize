@@ -21,11 +21,12 @@ router.post('/', (req, res, next) => {
 router.post('/auth', (req, res, next) => {
   Users.findOne({ username: { $eq: req.body.username } }, (err, user) => {
     if (err) return next(err);
+    if (!user) return res.send(false);
 
     bcrypt.compare(req.body.password, user.password, (err, match) => {
-      let ret = match ? user : false;
+      if (!match) return res.send(false);
 
-      res.json(ret);
+      res.json(user);
     });
   });
 });

@@ -1,10 +1,14 @@
 <script>
-// import api from '@/resources/base';
+/* eslint-disable no-return-assign */
+/* eslint-disable consistent-return */
+
+import api from '@/resources/base';
 
 export default {
   data() {
     return {
-      user: {},
+      user: { username: '', password: '' },
+      mode: false,
     };
   },
 
@@ -17,6 +21,23 @@ export default {
     },
     change(el) {
       this.$refs[el].classList.add('change');
+    },
+    login() {
+      if (!this.user.username && !this.user.password) return false;
+
+      api.post('users/auth', this.user).then(res => {
+        console.log(res.data);
+        
+        this.auth(res.data)
+      });
+    },
+    auth(user) {
+      if (!user) return this.mode = 'fail';
+
+      // this.$store.commit('logIn', user);
+      this.$router.push('/manage');
+
+      return this.mode = 'success';
     },
   },
 };
@@ -35,6 +56,7 @@ export default {
               @focus="edit('username')"
               @blur="blur('username')"
               @change="change('username')"
+              v-model="user.username"
             >
           </div>
 
@@ -46,10 +68,12 @@ export default {
               @focus="edit('password')"
               @blur="blur('password')"
               @change="change('password')"
+              v-model="user.password"
             >
           </div>
 
-          <button class="btn">Login</button>
+          <h1>{{ mode }}</h1>
+          <button class="btn" @click="login">Login</button>
         </div>
       </div>
     </div>
