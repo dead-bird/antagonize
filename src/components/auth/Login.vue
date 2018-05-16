@@ -16,28 +16,28 @@ export default {
     edit(el) {
       this.$refs[el].classList.add('edit');
     },
+
     blur(el) {
       this.$refs[el].classList.remove('edit');
     },
+
     change(el) {
       this.$refs[el].classList.add('change');
     },
+
     login() {
       if (!this.user.username && !this.user.password) return false;
 
       api.post('users/auth', this.user).then(res => {
-        console.log(res.data);
+        if (!res.data) return this.mode = 'fail';
         
-        this.auth(res.data)
+        console.log(res.data);
+
+        this.$store.commit('login', res.data);
+        this.$router.push('/manage');
+
+        return this.mode = 'success';
       });
-    },
-    auth(user) {
-      if (!user) return this.mode = 'fail';
-
-      // this.$store.commit('logIn', user);
-      this.$router.push('/manage');
-
-      return this.mode = 'success';
     },
   },
 };

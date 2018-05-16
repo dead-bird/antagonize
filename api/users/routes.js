@@ -26,6 +26,9 @@ router.post('/auth', (req, res, next) => {
     bcrypt.compare(req.body.password, user.password, (err, match) => {
       if (!match) return res.send(false);
 
+
+      delete user.password;
+
       res.json(user);
     });
   });
