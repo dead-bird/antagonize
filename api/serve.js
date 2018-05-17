@@ -30,7 +30,5 @@ app.use('/nouns', nouns);
 app.use('/insult', insult);
 app.use('/users', users);
 
-app.set('secret', 'snek');
-
 app.listen(3000, () => console.log('Example app listening on port 3000!'));
 

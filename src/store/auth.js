@@ -6,8 +6,6 @@ export default {
 
   mutations: {
     login(state, user) {
-      delete user.password;
-
       state.loggedIn = true;
       state.user = user;
 

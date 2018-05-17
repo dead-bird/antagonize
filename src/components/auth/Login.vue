@@ -28,7 +28,7 @@ export default {
     login() {
       if (!this.user.username && !this.user.password) return false;
 
-      api.post('users/auth', this.user).then(res => {
+      api.post('users/login', this.user).then(res => {
         if (!res.data) return this.mode = 'fail';
         
         console.log(res.data);

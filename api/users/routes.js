@@ -1,3 +1,4 @@
+const jwt     = require('jsonwebtoken');
 const Users   = require('./model.js');
 const express = require('express');
 const bcrypt  = require('bcrypt');
@@ -17,8 +18,8 @@ router.post('/', (req, res, next) => {
   });
 });
 
-/* Login */ 
-router.post('/auth', (req, res, next) => {
+/* Login */
+router.post('/login', (req, res, next) => {
   Users.findOne({ username: { $eq: req.body.username } }, (err, user) => {
     if (err) return next(err);
     if (!user) return res.send(false);
@@ -26,14 +27,26 @@ router.post('/auth', (req, res, next) => {
     bcrypt.compare(req.body.password, user.password, (err, match) => {
       if (!match) return res.send(false);
 
-      // const token = jwt.sign(payload, app.get('superSecret'), {
-      //   expiresInMinutes: 1440 // expires in 24 hours
-      // });
+      jwt.sign({ id: user._id }, 'secret', { expiresIn: '1h' }, (err, token) => {
+        if (err) return res.send({ err });
 
-      delete user.password;
+        user = user.toObject();
 
-      res.json(user);
+        delete user.password;
+        user.token = token;
+        
+        res.json(user);
+      });
     });
+  });
+});
+
+/* Authenticate Token */
+router.post('/auth', (req, res, next) => {
+  jwt.verify(req.body.token, 'secret', (err, decoded) => {
+    if (err) return res.json({ err });
+
+    res.json(true);
   });
 });
 
