@@ -19,4 +19,7 @@ new Vue({
   store,
   components: { Antagonize },
   template: '<Antagonize />',
+  beforeCreate() {
+    this.$store.commit('auth');
+  },
 });

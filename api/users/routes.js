@@ -52,9 +52,16 @@ router.post('/auth', (req, res, next) => {
   jwt.verify(req.body.token, secret, (err, decoded) => {
     if (err) return res.send({ success: false, error: err.message });
 
-    console.log('decoded');
+    Users.findOne({ _id: { $eq: decoded.id }}, (err, user) => {
+      if (err) return res.send({ success: false, error: err.message });
+      if (!user) return res.send({ success: false, error: 'User not found' });
 
-    // res.json(true);
+      user = user.toObject();
+        
+      delete user.password;
+  
+      res.json({ success: true, user: user });
+    });
   });
 });
 
