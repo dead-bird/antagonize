@@ -29,11 +29,9 @@ export default {
       if (!this.user.username && !this.user.password) return false;
 
       api.post('users/login', this.user).then(res => {
-        if (!res.data) return this.mode = 'fail';
-        
-        console.log(res.data);
+        if (!res.data.success) return this.mode = 'fail';
 
-        this.$store.commit('login', res.data);
+        this.$store.commit('login', res.data.user);
         this.$router.push('/manage');
 
         return this.mode = 'success';

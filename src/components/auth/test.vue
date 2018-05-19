@@ -3,9 +3,12 @@ import api from '@/resources/base';
 
 export default {
   methods: {
-    async fetch() {
-      console.log('fetch');
-      this.user = await api.post('users/auth', { username: 'dave', password: 'test' });
+    fetch() {
+      const user = JSON.parse(localStorage.getItem('user'));
+
+      api.post('users/auth', { token: user.token }).then(res => {
+        console.log(res);
+      });
     },
   },
 };
