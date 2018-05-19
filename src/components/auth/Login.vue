@@ -70,7 +70,6 @@ export default {
             >
           </div>
 
-          <h1>{{ mode }}</h1>
           <button class="btn" @click="login">Login</button>
         </div>
       </div>

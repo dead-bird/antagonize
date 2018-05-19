@@ -49,14 +49,14 @@ export default {
     remove() {
       this.mode = 'delete';
 
-      if (confirm(`Are you sure you want to delete '${this.item.text}'`)) {
-        api.delete(this.path).then(() => {
-          console.log('deleted - need to $emit to tell parent to remove from list');
-          this.reset(0);
-        });
-      } else {
-        this.reset(0);
-      }
+      // if (confirm(`Are you sure you want to delete '${this.item.text}'`)) {
+      //   api.delete(this.path).then(() => {
+      //     console.log('deleted - need to $emit to tell parent to remove from list');
+      //     this.reset(0);
+      //   });
+      // } else {
+      //   this.reset(0);
+      // }
     },
 
     reset(dur = 2000) {
