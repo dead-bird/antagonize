@@ -1,14 +1,12 @@
 <script>
-import api from '@/resources/base';
+import Notif from '@/event';
 
 export default {
   methods: {
     fetch() {
-      const user = JSON.parse(localStorage.getItem('user'));
+      console.log('test');
 
-      api.post('users/auth', { token: user.token }).then(res => {
-        console.log(res);
-      });
+      Notif.$emit('error', 'message');
     },
   },
 };

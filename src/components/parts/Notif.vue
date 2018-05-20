@@ -1,31 +1,47 @@
 <script>
-import Vue from 'vue';
 import Notif from '@/event';
 
-export default new Vue({
+export default {
   methods: {
     nudge(type, message) {
-      console.log('notif: ', type, message);
+      this.notifs.push({ type, message });
+
+      const self = this;
+
+      setTimeout(() => {
+        self.kill();
+      }, 3000);
+    },
+
+    kill() {
+      this.notifs.splice(0, 1);
     },
   },
 
-  mounted() {
-    // Notif.$on('error', this.nudge('error', payLoad));
-
-    Notif.$on('error', payLoad => {
-      console.log('notif: ', payLoad);
-    });
+  data() {
+    return {
+      notifs: [],
+    };
   },
-});
+
+  created() {
+    Notif.$on('error', payLoad => this.nudge('error', payLoad));
+
+    Notif.$on('success', payLoad => this.nudge('success', payLoad));
+  },
+};
 </script>
 
 <template>
   <div class="notif-bar">
-    <div class="notif">
-      <div class="container">
-        message
+
+    <transition-group name="list">
+      <div class="notif" :class="notif.type" v-for="notif in notifs" :key="notif.message">
+        <div class="container">
+          {{ notif.message }}
+        </div>
       </div>
-    </div>
+    </transition-group>
   </div>
 </template>
 
@@ -40,10 +56,28 @@ export default new Vue({
 
 .notif {
   width: 100%;
-  padding: 15px 0;
+  padding: 12px 0;
   margin-bottom: 10px;
   background-color: paleturquoise;
   color: white;
-  font-size: 26px;
+  font-size: 22px;
+
+  &.error {
+    background-color: tomato;
+  }
+  &.success {
+    background-color: blueviolet;
+  }
+}
+
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.5s;
+}
+
+.list-enter,
+.list-leave-to {
+  opacity: 0;
+  transform: translateY(-10px);
 }
 </style>

@@ -9,7 +9,6 @@ export default {
   data() {
     return {
       user: { username: '', password: '' },
-      mode: false,
     };
   },
 
@@ -27,19 +26,21 @@ export default {
     },
 
     login() {
-      if (!this.user.username && !this.user.password) return false;
-
       api.post('users/login', this.user).then(res => {
-        console.log('login: ', res.data.error);
-
         if (!res.data.success) return Notif.$emit('error', res.data.error);
+
+        Notif.$emit('success', `Welcome back, ${res.data.user.username}`);
 
         this.$store.commit('login', res.data.user);
         this.$router.push('/manage');
-
-        return this.mode = 'success';
       });
     },
+  },
+
+  beforeCreate() {
+    if (this.$store.state.auth.loggedIn) {
+      this.$router.push('/manage');
+    }
   },
 };
 </script>
@@ -109,10 +110,11 @@ label {
   position: absolute;
   top: 10px;
   margin-bottom: 0;
-  transition: all .2s;
+  transition: all 0.2s;
   pointer-events: none;
 
-  &.edit, &.change {
+  &.edit,
+  &.change {
     transform: translateY(-32px);
     font-size: 14px;
   }
