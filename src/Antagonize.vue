@@ -1,14 +1,18 @@
 <script>
+import Deets from '@/components/user/Deets';
 import Notif from '@/components/parts/Notif';
 
 export default {
-  components: { Notif },
+  components: { Deets, Notif },
 };
 </script>
 
 <template>
   <div id="antagonize">
-    <Notif />
+    <Deets />
+
+    <Notif/>
+
     <router-view/>
   </div>
 </template>
@@ -21,7 +25,7 @@ body {
   -webkit-font-smoothing: antialiased;
   line-height: 1.2;
   font-size: 16px;
-  padding: 60px 0;
+  padding: 80px 0;
 }
 
 a {

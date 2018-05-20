@@ -23,12 +23,11 @@ export default {
       <Example />
     </div>
 
-    <Test />
+    <!-- <Test /> -->
 
     <Define />
   </section>
 </template>
 
 <style lang="scss" scoped>
-
 </style>
