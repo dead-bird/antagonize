@@ -1,15 +1,15 @@
 <script>
-import Deets from '@/components/user/Deets';
+import Top from '@/components/parts/Top';
 import Notif from '@/components/parts/Notif';
 
 export default {
-  components: { Deets, Notif },
+  components: { Top, Notif },
 };
 </script>
 
 <template>
   <div id="antagonize">
-    <Deets />
+    <Top />
 
     <Notif/>
 
@@ -25,11 +25,17 @@ body {
   -webkit-font-smoothing: antialiased;
   line-height: 1.2;
   font-size: 16px;
-  padding: 80px 0;
+  padding: 60px 0;
+  padding-top: 0;
 }
 
 a {
   color: #e6e6e6;
+
+  &:hover {
+    color: #e6e6e6;
+    text-decoration: none;
+  }
 }
 
 .dump {

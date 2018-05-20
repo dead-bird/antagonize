@@ -83,7 +83,7 @@ export default {
 
 <style lang="scss" scoped>
 .login {
-  padding-top: 120px;
+  padding-top: 160px;
 }
 
 .form-group {

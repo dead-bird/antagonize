@@ -5,11 +5,7 @@ export default {
   components: { List },
 
   beforeCreate() {
-    if (!this.$store.state.auth.loggedIn) {
-      console.log('not logged in');
-
-      this.$router.push('/login');
-    }
+    if (!this.$store.state.auth.loggedIn) this.$router.push('/login');
   },
 };
 </script>

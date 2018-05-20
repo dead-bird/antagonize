@@ -14,10 +14,6 @@ export default {
   },
 
   computed: {
-    loggedIn() {
-      return this.$store.state.auth.loggedIn;
-    },
-
     user() {
       return this.$store.state.auth.user;
     },
@@ -26,36 +22,30 @@ export default {
 </script>
 
 <template>
-  <div class="user" v-if="loggedIn">
-    <div class="container">
-      <div class="profile-deets">
-        <div class="profile-name">{{ user.username }}</div>
-        <div class="exit" @click="exit">Logout</div>
-      </div>
+  <div>
+    <div class="profile-deets">
+      <router-link :to="`/user/${user._id}`" class="profile-name">
+        {{ user.username }}
+      </router-link>
 
-      <div class="profile-image">
-        <img src="https://i.imgur.com/i9y13NP.jpg" alt="memes">
-      </div>
+      <div class="exit" @click="exit">Logout</div>
     </div>
+
+    <router-link :to="`/user/${user._id}`" class="profile-image">
+      <img src="https://i.imgur.com/i9y13NP.jpg" alt="memes">
+    </router-link>
   </div>
 </template>
 
 <style lang="scss" scoped>
-.user {
-  width: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 0;
-  padding: 10px;
-}
-
 .profile-image {
+  display: block;
   float: right;
   padding: 2.5px 7.5px;
-  border-right: 1px solid white;
+  border-right: 1px solid #e6e6e6;
 
   img {
+    border-radius: 50%;
     width: 38px;
     height: 38px;
   }
@@ -67,6 +57,7 @@ export default {
 }
 
 .profile-name {
+  display: block;
   margin-bottom: 4px;
   text-transform: capitalize;
 }
