@@ -61,12 +61,34 @@ export default {
   background-color: paleturquoise;
   color: white;
   font-size: 22px;
+  position: relative;
 
   &.error {
     background-color: tomato;
   }
   &.success {
     background-color: blueviolet;
+  }
+
+  &:before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background-color: white;
+    animation-name: count;
+    animation-duration: 3s;
+    animation-fill-mode: forwards;
+  }
+}
+
+@keyframes count {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0;
   }
 }
 
@@ -78,6 +100,6 @@ export default {
 .list-enter,
 .list-leave-to {
   opacity: 0;
-  transform: translateY(-10px);
+  transform: translateY(-15px);
 }
 </style>
