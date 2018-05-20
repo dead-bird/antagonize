@@ -1,9 +1,14 @@
 <script>
-export default {};
+import Notif from '@/components/parts/Notif';
+
+export default {
+  components: { Notif },
+};
 </script>
 
 <template>
   <div id="antagonize">
+    <Notif />
     <router-view/>
   </div>
 </template>

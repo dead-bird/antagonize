@@ -3,6 +3,7 @@
 /* eslint-disable consistent-return */
 
 import api from '@/resources/base';
+import Notif from '@/event';
 
 export default {
   data() {
@@ -29,7 +30,9 @@ export default {
       if (!this.user.username && !this.user.password) return false;
 
       api.post('users/login', this.user).then(res => {
-        if (!res.data.success) return this.mode = 'fail';
+        console.log('login: ', res.data.error);
+
+        if (!res.data.success) return Notif.$emit('error', res.data.error);
 
         this.$store.commit('login', res.data.user);
         this.$router.push('/manage');
