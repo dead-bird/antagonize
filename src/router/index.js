@@ -6,7 +6,8 @@ import Home from '@/components/single/Home';
 import Login from '@/components/auth/Login';
 import Manage from '@/components/single/Manage';
 
-import User from '@/components/user/User';
+import Users from '@/components/users/Users';
+import User from '@/components/users/User';
 
 import Lost from '@/components/single/Lost';
 
@@ -27,7 +28,11 @@ export default new Router({
       component: Manage,
     },
     {
-      path: '/user/:id',
+      path: '/users',
+      component: Users,
+    },
+    {
+      path: '/users/:id',
       component: User,
     },
     {

@@ -24,7 +24,7 @@ export default {
 <template>
   <div>
     <div class="profile-deets">
-      <router-link :to="`/user/${user._id}`" class="profile-name">
+      <router-link :to="`/users/${user._id}`" class="profile-name">
         {{ user.username }}
       </router-link>
 
