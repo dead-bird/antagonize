@@ -1,5 +1,5 @@
 <script>
-import Deets from '@/components/user/Deets';
+import Deets from '@/components/users/Deets';
 
 export default {
   components: { Deets },

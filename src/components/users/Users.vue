@@ -16,7 +16,7 @@ export default {
       api.get('users').then(res => {
         if (!res.data.success) return Notif.$emit('error', res.data.error);
 
-        this.users.push(res.data.users);
+        this.users.push(res.data.users[0]);
       });
     },
   },
@@ -29,7 +29,11 @@ export default {
 
 <template>
   <div class="container">
-    {{ users }}
+    <div v-for="user in users" :key="user._id">
+      <router-link :to="`/users/${user._id}`">
+        {{ user.username }}
+      </router-link>
+    </div>
   </div>
 </template>
 

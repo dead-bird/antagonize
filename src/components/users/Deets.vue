@@ -31,7 +31,7 @@ export default {
       <div class="exit" @click="exit">Logout</div>
     </div>
 
-    <router-link :to="`/user/${user._id}`" class="profile-image">
+    <router-link :to="`/users/${user._id}`" class="profile-image">
       <img src="https://i.imgur.com/i9y13NP.jpg" alt="memes">
     </router-link>
   </div>
