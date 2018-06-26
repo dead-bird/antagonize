@@ -3,6 +3,7 @@ const Users = require('./model.js');
 const express = require('express');
 const bcrypt = require('bcrypt');
 const router = express.Router();
+const md5 = require('md5');
 const secret = 'secret';
 const salt = 10;
 
@@ -16,6 +17,8 @@ router.get('/', (req, res, next) => {
     users.map(user => {
       user = user.toObject();
       delete user.password;
+
+      user.avatar = gravatar(user.email);
 
       return data.push(user);
     });
@@ -33,6 +36,8 @@ router.post('/', (req, res, next) => {
 
     Users.create(user, (err, user) => {
       if (err) return res.send({ success: false, error: err.message });
+
+      user.avatar = gravatar(user.email);
 
       res.json({ success: true, user: user });
     });
@@ -64,6 +69,7 @@ router.post('/login', (req, res, next) => {
 
         delete user.password;
         user.token = token;
+        user.avatar = gravatar(user.email);
 
         res.json({ success: true, user: user });
       });
@@ -82,11 +88,17 @@ router.post('/auth', (req, res, next) => {
 
       user = user.toObject();
 
+      user.avatar = gravatar(user.email);
+
       delete user.password;
 
       res.json({ success: true, user: user });
     });
   });
 });
+
+function gravatar(email) {
+  return `https://www.gravatar.com/avatar/${md5(email)}?s=200`;
+}
 
 module.exports = router;

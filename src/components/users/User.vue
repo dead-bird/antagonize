@@ -11,7 +11,7 @@ export default {
 <template>
   <div class="container">
     <div class="user">
-      <div><img class="profile-image" src="https://i.imgur.com/i9y13NP.jpg" alt=""></div>
+      <div><img class="profile-image" :src="user.avatar" :alt="user.username"></div>
 
       <h1>{{ user.username }}</h1>
     </div>

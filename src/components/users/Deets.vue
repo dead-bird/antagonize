@@ -32,7 +32,7 @@ export default {
     </div>
 
     <router-link :to="`/users/${user._id}`" class="profile-image">
-      <img src="https://i.imgur.com/i9y13NP.jpg" alt="memes">
+      <img :src="user.avatar" :alt="user.username">
     </router-link>
   </div>
 </template>
