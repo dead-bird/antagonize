@@ -35,8 +35,6 @@ export default {
           this.$router.push('/manage');
         })
         .catch(err => {
-          console.log(err);
-
           Notif.$emit('error', err.response.data);
         });
     },

@@ -4,13 +4,9 @@ import api from '@/resources/base';
 export default {
   data() {
     return {
-      modifiers: {
-        data: {},
-      },
+      modifiers: {},
 
-      nouns: {
-        data: {},
-      },
+      nouns: {},
 
       start: false,
 
@@ -20,19 +16,34 @@ export default {
   },
 
   methods: {
-    async fetch() {
-      this.modifiers = await api.get('modifiers');
-      this.nouns = await api.get('nouns');
+    fetch() {
+      api
+        .get('modifiers')
+        .then(modifiers => {
+          this.modifiers = modifiers.data;
+        })
+        .catch(err => {
+          console.error(err.response.data);
+        });
+
+      api
+        .get('nouns')
+        .then(nouns => {
+          this.nouns = nouns.data;
+        })
+        .catch(err => {
+          console.error(err.response.data);
+        });
     },
 
     next() {
       this.start = true;
 
-      let rand = Math.floor(Math.random() * this.modifiers.data.length);
-      this.m = this.modifiers.data[rand]._id;
+      let rand = Math.floor(Math.random() * this.modifiers.length);
+      this.m = this.modifiers[rand]._id;
 
-      rand = Math.floor(Math.random() * this.nouns.data.length);
-      this.n = this.nouns.data[rand]._id;
+      rand = Math.floor(Math.random() * this.nouns.length);
+      this.n = this.nouns[rand]._id;
     },
   },
 
@@ -49,14 +60,14 @@ export default {
     hey you. yeah you. you
 
     <transition-group name="up" class="wrap">
-      <span v-for="modifier in modifiers.data" v-if="start && modifier._id === m" :key="modifier._id">
+      <span v-for="modifier in modifiers" v-if="start && modifier._id === m" :key="modifier._id">
         {{ modifier.text }}
       </span>
       <span v-if="!start" key="start">dumb</span>
     </transition-group>
 
     <transition-group name="down" class="wrap">
-      <span v-for="noun in nouns.data" v-show="start && noun._id === n" :key="noun._id">
+      <span v-for="noun in nouns" v-show="start && noun._id === n" :key="noun._id">
         {{ noun.text }}
       </span>
       <span v-if="!start" key="start">bastard</span>

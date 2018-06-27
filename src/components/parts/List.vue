@@ -1,6 +1,7 @@
 <script>
 import api from '@/resources/base';
 import Form from '@/components/inputs/Form';
+import Notif from '@/event';
 
 export default {
   props: ['route'],
@@ -15,7 +16,14 @@ export default {
 
   methods: {
     async fetch() {
-      this.results = await api.get(this.route);
+      api
+        .get(this.route)
+        .then(res => {
+          this.results = res.data;
+        })
+        .catch(err => {
+          Notif.$emit('error', err.response.data);
+        });
     },
   },
 
@@ -29,7 +37,7 @@ export default {
   <div>
     <h1>{{ route }}</h1>
   
-    <div v-for="item in results.data" :key="item._id">
+    <div v-for="item in results" :key="item._id">
       <Form :pass="item" :route="route" class="push-bottom" />
     </div>
   </div>

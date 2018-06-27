@@ -1,5 +1,6 @@
 <script>
 import api from '@/resources/base';
+import Notif from '@/event';
 import Detail from '@/components/inputs/Detail';
 // import Check from '@/components/inputs/Check';
 // import Tick from '@/components/inputs/Tick';
@@ -41,9 +42,14 @@ export default {
 
       this.mode = 'save';
 
-      api.put(this.path, this.item).then(() => {
-        this.reset();
-      });
+      api
+        .put(this.path, this.item)
+        .then(() => {
+          this.reset();
+        })
+        .catch(err => {
+          Notif.$emit('error', err.response.data);
+        });
     },
 
     remove() {

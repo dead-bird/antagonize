@@ -2,7 +2,6 @@
 import JavaScript from '@/components/examples/JavaScript';
 import ES6 from '@/components/examples/ES6';
 import cURL from '@/components/examples/cURL';
-import api from '@/resources/base';
 
 export default {
   components: { JavaScript, ES6, cURL },
@@ -16,24 +15,12 @@ export default {
       selected: 'ES6',
 
       response: {
-        data: {
-          text: 'actual twat',
-          modifier: 'actual',
-          noun: 'twat',
-          nsfw: true,
-        },
+        text: 'actual twat',
+        modifier: 'actual',
+        noun: 'twat',
+        nsfw: true,
       },
     };
-  },
-
-  methods: {
-    async fetch() {
-      this.response = await api.get('insult');
-    },
-  },
-
-  created() {
-    this.fetch();
   },
 };
 </script>
@@ -55,7 +42,7 @@ export default {
       <component :is="selected" :base="base" />
 
       <h2>Response</h2>
-      <pre v-highlightjs><code>{{ response.data }}</code></pre>
+      <pre v-highlightjs><code>{{ response }}</code></pre>
     </div>
   </div>
 </template>

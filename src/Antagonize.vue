@@ -11,9 +11,9 @@ export default {
   <div id="antagonize">
     <Top />
 
-    <Notif/>
+    <Notif />
 
-    <router-view/>
+    <router-view />
   </div>
 </template>
 
