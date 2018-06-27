@@ -1,10 +1,12 @@
-const Nouns   = require('./model.js');
+const Nouns = require('./model.js');
 const express = require('express');
-const router  = express.Router();
+const router = express.Router();
 
 /* Get All Nouns */
 router.get('/', (req, res, next) => {
   Nouns.find((err, nouns) => {
+    if (err) return next(err);
+
     res.json(nouns);
   });
 });
@@ -29,17 +31,22 @@ router.post('/', (req, res, next) => {
 
 /* Update a Noun */
 router.put('/:id', (req, res, next) => {
-  Nouns.findByIdAndUpdate(req.params.id, req.body, {upsert:true}, (err, noun) => {
-    if (err) return res.send(500, { error: err });
+  Nouns.findByIdAndUpdate(
+    req.params.id,
+    req.body,
+    { upsert: true },
+    (err, noun) => {
+      if (err) return next(err);
 
-    return res.json(noun);
-  });
+      return res.json(noun);
+    }
+  );
 });
 
 /* Delete a Noun */
 router.delete('/:id', (req, res, next) => {
   Nouns.remove({ _id: req.params.id }, (err, noun) => {
-    if (err) return res.send(500, { error: err });
+    if (err) return next(err);
 
     return res.json(noun);
   });

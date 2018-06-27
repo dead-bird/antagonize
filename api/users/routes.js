@@ -1,4 +1,3 @@
-const error = require('../error.js');
 const jwt = require('jsonwebtoken');
 const Users = require('./model.js');
 const express = require('express');
@@ -11,7 +10,7 @@ const salt = 10;
 /* Get All Users */
 router.get('/', (req, res, next) => {
   Users.find((err, users) => {
-    if (err) return error.handle(res, err);
+    if (err) return next(err);
 
     let data = users.map(user => {
       user = user.toObject();
@@ -27,14 +26,14 @@ router.get('/', (req, res, next) => {
 });
 
 /* Create new User */
-router.post('/', (req, res) => {
+router.post('/', (req, res, next) => {
   bcrypt.hash(req.body.password, salt, (err, hash) => {
-    if (err) return error.handle(res, err);
+    if (err) return next(err);
 
     let user = { username: req.body.username, password: hash };
 
     Users.create(user, (err, user) => {
-      if (err) return error.handle(res, err);
+      if (err) return next(err);
 
       user.avatar = gravatar(user.email);
 
@@ -46,11 +45,12 @@ router.post('/', (req, res) => {
 /* Login */
 router.post('/login', (req, res, next) => {
   Users.findOne({ username: { $eq: req.body.username } }, (err, user) => {
-    if (err) return error.handle(res, err);
+    if (err) return next(err);
+
     if (!user) return res.status(404).send('User not found');
 
     bcrypt.compare(req.body.password, user.password, (err, match) => {
-      if (err) return error.handle(res, err);
+      if (err) return next(err);
 
       if (!match) return res.status(403).send('Incorrect username or password');
 
@@ -72,10 +72,11 @@ router.post('/login', (req, res, next) => {
 /* Authenticate Token */
 router.post('/auth', (req, res, next) => {
   jwt.verify(req.body.token, secret, (err, decoded) => {
-    if (err) return error.handle(res, err);
+    if (err) return next(err);
 
     Users.findOne({ _id: { $eq: decoded.id } }, (err, user) => {
-      if (err) return error.handle(res, err);
+      if (err) return next(err);
+
       if (!user) return res.status(404).send('User not found');
 
       user = user.toObject();

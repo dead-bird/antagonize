@@ -1,10 +1,12 @@
 const Modifiers = require('./model.js');
-const express   = require('express');
-const router    = express.Router();
+const express = require('express');
+const router = express.Router();
 
 /* Get All Modifiers */
 router.get('/', (req, res, next) => {
   Modifiers.find((err, modifiers) => {
+    if (err) return next(err);
+
     res.json(modifiers);
   });
 });
@@ -29,17 +31,22 @@ router.post('/', (req, res, next) => {
 
 /* Update a Modifier */
 router.put('/:id', (req, res, next) => {
-  Modifiers.findByIdAndUpdate(req.params.id, req.body, {upsert:true}, (err, modifier) => {
-    if (err) return res.send(500, { error: err });
+  Modifiers.findByIdAndUpdate(
+    req.params.id,
+    req.body,
+    { upsert: true },
+    (err, modifier) => {
+      if (err) return next(err);
 
-    return res.json(modifier);
-  });
+      return res.json(modifier);
+    }
+  );
 });
 
 /* Delete a Modifier */
 router.delete('/:id', (req, res, next) => {
   Modifiers.remove({ _id: req.params.id }, (err, modifier) => {
-    if (err) return res.send(500, { error: err });
+    if (err) return next(err);
 
     return res.json(modifier);
   });
