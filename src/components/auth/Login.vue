@@ -26,14 +26,19 @@ export default {
     },
 
     login() {
-      api.post('users/login', this.user).then(res => {
-        if (!res.data.success) return Notif.$emit('error', res.data.error);
+      api
+        .post('users/login', this.user)
+        .then(res => {
+          Notif.$emit('success', `Welcome back, ${res.data.username}`);
 
-        Notif.$emit('success', `Welcome back, ${res.data.user.username}`);
+          this.$store.commit('login', res.data);
+          this.$router.push('/manage');
+        })
+        .catch(err => {
+          console.log(err);
 
-        this.$store.commit('login', res.data.user);
-        this.$router.push('/manage');
-      });
+          Notif.$emit('error', err.response.data);
+        });
     },
   },
 

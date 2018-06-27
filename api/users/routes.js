@@ -1,3 +1,4 @@
+const error = require('../error.js');
 const jwt = require('jsonwebtoken');
 const Users = require('./model.js');
 const express = require('express');
@@ -10,36 +11,34 @@ const salt = 10;
 /* Get All Users */
 router.get('/', (req, res, next) => {
   Users.find((err, users) => {
-    if (err) return res.send({ success: false, error: err.message });
+    if (err) return error.handle(res, err);
 
-    let data = [];
-
-    users.map(user => {
+    let data = users.map(user => {
       user = user.toObject();
       delete user.password;
 
       user.avatar = gravatar(user.email);
 
-      return data.push(user);
+      return user;
     });
 
-    res.json({ success: true, users: data });
+    res.json(data);
   });
 });
 
 /* Create new User */
-router.post('/', (req, res, next) => {
+router.post('/', (req, res) => {
   bcrypt.hash(req.body.password, salt, (err, hash) => {
-    if (err) return res.send({ success: false, error: err.message });
+    if (err) return error.handle(res, err);
 
     let user = { username: req.body.username, password: hash };
 
     Users.create(user, (err, user) => {
-      if (err) return res.send({ success: false, error: err.message });
+      if (err) return error.handle(res, err);
 
       user.avatar = gravatar(user.email);
 
-      res.json({ success: true, user: user });
+      res.json(user);
     });
   });
 });
@@ -47,23 +46,16 @@ router.post('/', (req, res, next) => {
 /* Login */
 router.post('/login', (req, res, next) => {
   Users.findOne({ username: { $eq: req.body.username } }, (err, user) => {
-    if (err) return res.send({ success: false, error: err.message });
-    if (!user)
-      return res.send({
-        success: false,
-        error: 'Incorrect username or password',
-      });
+    if (err) return error.handle(res, err);
+    if (!user) return res.status(404).send('User not found');
 
     bcrypt.compare(req.body.password, user.password, (err, match) => {
-      if (err) return res.send({ success: false, error: err.message });
-      if (!match)
-        return res.send({
-          success: false,
-          error: 'Incorrect username or password',
-        });
+      if (err) return error.handle(res, err);
+
+      if (!match) return res.status(403).send('Incorrect username or password');
 
       jwt.sign({ id: user._id }, secret, { expiresIn: '1h' }, (err, token) => {
-        if (err) return res.send({ success: false, error: err.message });
+        if (err) return error.handle(res, err);
 
         user = user.toObject();
 
@@ -71,7 +63,7 @@ router.post('/login', (req, res, next) => {
         user.token = token;
         user.avatar = gravatar(user.email);
 
-        res.json({ success: true, user: user });
+        res.json(user);
       });
     });
   });
@@ -80,11 +72,11 @@ router.post('/login', (req, res, next) => {
 /* Authenticate Token */
 router.post('/auth', (req, res, next) => {
   jwt.verify(req.body.token, secret, (err, decoded) => {
-    if (err) return res.send({ success: false, error: err.message });
+    if (err) return error.handle(res, err);
 
     Users.findOne({ _id: { $eq: decoded.id } }, (err, user) => {
-      if (err) return res.send({ success: false, error: err.message });
-      if (!user) return res.send({ success: false, error: 'User not found' });
+      if (err) return error.handle(res, err);
+      if (!user) return res.status(404).send('User not found');
 
       user = user.toObject();
 
@@ -92,7 +84,7 @@ router.post('/auth', (req, res, next) => {
 
       delete user.password;
 
-      res.json({ success: true, user: user });
+      res.json(user);
     });
   });
 });

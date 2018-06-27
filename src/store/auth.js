@@ -31,15 +31,16 @@ export default {
 
       state.loggedIn = true;
 
-      api.post('users/auth', { token: user.token }).then(res => {
-        if (!res.data.success) {
-          state.loggedIn = false;
-          localStorage.removeItem('user');
-        } else {
+      api
+        .post('users/auth', { token: user.token })
+        .then(res => {
           state.user = res.data.user;
           state.user.token = user.token;
-        }
-      });
+        })
+        .catch(() => {
+          state.loggedIn = false;
+          localStorage.removeItem('user');
+        });
     },
   },
 };

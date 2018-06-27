@@ -13,11 +13,14 @@ export default {
 
   methods: {
     fetch() {
-      api.get('users').then(res => {
-        if (!res.data.success) return Notif.$emit('error', res.data.error);
-
-        this.users.push(res.data.users[0]);
-      });
+      api
+        .get('users')
+        .then(res => {
+          this.users = res.data;
+        })
+        .catch(err => {
+          Notif.$emit('error', err.response.data);
+        });
     },
   },
 
