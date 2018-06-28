@@ -52,17 +52,20 @@ export default {
         });
     },
 
-    remove() {
-      this.mode = 'delete';
+    confirm() {
+      console.log('cf');
 
-      // if (confirm(`Are you sure you want to delete '${this.item.text}'`)) {
+      this.mode = 'delete';
+    },
+
+    remove() {
+      console.log('remove');
+      this.reset(0);
+
       //   api.delete(this.path).then(() => {
       //     console.log('deleted - need to $emit to tell parent to remove from list');
       //     this.reset(0);
       //   });
-      // } else {
-      //   this.reset(0);
-      // }
     },
 
     reset(dur = 2000) {
@@ -103,12 +106,15 @@ export default {
     </div>
 
     <div class="col-sm-2 text-center">
-      <div class="nsfw" :class="item.nsfw ? 'checked' : ''" @click="mode === 'edit' ? nsfw() : null">️️⚠️</div>
+      <div class="nsfw" :class="{checked: item.nsfw}" @click="mode === 'edit' ? nsfw() : null">️️⚠️</div>
     </div>
 
     <div class="col-sm-2 text-center">
       <div class="action" v-if="mode === 'edit'" @click="mode === 'edit' ? save() : null">save</div>
-      <div class="action delete" v-else @click="remove()">x</div>
+
+      <div class="action" v-else-if="mode === 'delete'" @click="remove()">confirm</div>
+
+      <div class="action delete" v-else @click="confirm()">x</div>
     </div>
   </div>
 </template>
