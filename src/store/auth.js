@@ -34,7 +34,7 @@ export default {
       api
         .post('users/auth', { token: user.token })
         .then(res => {
-          state.user = res.data.user;
+          state.user = res.data;
           state.user.token = user.token;
         })
         .catch(() => {
