@@ -22,7 +22,7 @@ export default {
 </script>
 
 <template>
-  <div>
+  <div v-if="user">
     <div class="profile-deets">
       <router-link :to="`/users/${user._id}`" class="profile-name">
         {{ user.username }}
