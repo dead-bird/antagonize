@@ -37,7 +37,9 @@ export default {
           state.user = res.data;
           state.user.token = user.token;
         })
-        .catch(() => {
+        .catch(err => {
+          console.error(err);
+
           state.loggedIn = false;
           localStorage.removeItem('user');
         });
