@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 
 let schema = new mongoose.Schema(
   {
-    text: String,
-    nsfw: Boolean,
+    text: { type: String, required: true },
+    nsfw: { type: Boolean, required: true },
     author: String,
     date: { type: Date, default: Date.now },
   },
