@@ -10,4 +10,10 @@ let schema = new mongoose.Schema(
   { versionKey: false }
 );
 
-module.exports = mongoose.model('Modifiers', schema);
+module.exports = {
+  nouns: mongoose.model('Nouns', schema),
+  modifiers: mongoose.model('Modifiers', schema),
+};
+
+// export const nouns = mongoose.model('Nouns', schema);
+// export let modifiers = mongoose.model('Modifiers', schema);

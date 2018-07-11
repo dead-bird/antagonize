@@ -1,37 +1,37 @@
-const Nouns = require('./model.js');
+const Words = require('./model.js');
 const express = require('express');
 const router = express.Router();
 
-/* Get All Nouns */
+/* List */
 router.get('/', (req, res, next) => {
-  Nouns.find((err, nouns) => {
+  Words[word(req)].find((err, nouns) => {
     if (err) return next(err);
 
     res.json(nouns);
   });
 });
 
-/* Get a Noun by ID */
+/* Show */
 router.get('/:id', (req, res, next) => {
-  Nouns.findById(req.params.id, (err, noun) => {
+  Words[word(req)].findById(req.params.id, (err, noun) => {
     if (err) return next(err);
 
     res.json(noun);
   });
 });
 
-/* Create a Noun */
+/* Create */
 router.post('/', (req, res, next) => {
-  Nouns.create(req.body, (err, noun) => {
+  Words[word(req)].create(req.body, (err, noun) => {
     if (err) return next(err);
 
     res.json(noun);
   });
 });
 
-/* Update a Noun */
+/* Update */
 router.put('/:id', (req, res, next) => {
-  Nouns.findByIdAndUpdate(
+  Words[word(req)].findByIdAndUpdate(
     req.params.id,
     req.body,
     { upsert: true },
@@ -43,13 +43,17 @@ router.put('/:id', (req, res, next) => {
   );
 });
 
-/* Delete a Noun */
+/* Delete */
 router.delete('/:id', (req, res, next) => {
-  Nouns.remove({ _id: req.params.id }, (err, noun) => {
+  Words[word(req)].remove({ _id: req.params.id }, (err, noun) => {
     if (err) return next(err);
 
     return res.json(noun);
   });
 });
+
+function word(route) {
+  return route.baseUrl.replace('/', '');
+}
 
 module.exports = router;
