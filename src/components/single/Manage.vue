@@ -17,7 +17,7 @@ export default {
         <List route="modifiers" />
       </div>
 
-      <div class="col-1 text-center"><div class="line"></div></div>
+      <div class="col-auto text-center"><div class="line"></div></div>
 
       <div class="col col-lg-4">
         <List route="nouns" />
