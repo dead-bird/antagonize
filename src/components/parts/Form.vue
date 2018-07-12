@@ -1,16 +1,12 @@
 <script>
 import api from '@/resources/base';
 import Notif from '@/event';
-import Detail from '@/components/inputs/Detail';
-// import Check from '@/components/inputs/Check';
-// import Tick from '@/components/inputs/Tick';
-// import TextInput from '@/components/inputs/Text';
+import Detail from '@/components/parts/Detail';
 
 export default {
   props: ['route', 'pass'],
 
   components: { Detail },
-  // components: { Check, TextInput, Tick },
 
   data() {
     return {
@@ -28,7 +24,7 @@ export default {
     },
 
     nsfw() {
-      this.item.nsfw = !this.item.nsfw;
+      if (this.mode === 'edit') this.item.nsfw = !this.item.nsfw;
     },
 
     cancel() {
@@ -38,7 +34,7 @@ export default {
     },
 
     save() {
-      if (!this.item.text) return;
+      if (!this.item.text || this.mode !== 'edit') return;
 
       this.mode = 'save';
 
@@ -53,13 +49,10 @@ export default {
     },
 
     confirm() {
-      console.log('cf');
-
       this.mode = 'delete';
     },
 
     remove() {
-      console.log('remove');
       this.reset(0);
 
       //   api.delete(this.path).then(() => {
@@ -92,7 +85,7 @@ export default {
 
 <template>
   <div class="row align-items-center push-bottom form" :class="`state-${mode}`">
-    <div class="col-sm-8">
+    <div class="col">
       <input
         class="text"
         ref="text"
@@ -105,16 +98,16 @@ export default {
         <Detail :item="item" />
     </div>
 
-    <div class="col-sm-2 text-center">
-      <div class="nsfw" :class="{checked: item.nsfw}" @click="mode === 'edit' ? nsfw() : null">️️⚠️</div>
+    <div class="col-auto text-center">
+      <button class="nsfw" :class="{checked: item.nsfw}" @click="nsfw">nsfw</button>
     </div>
 
-    <div class="col-sm-2 text-center">
-      <div class="action" v-if="mode === 'edit'" @click="mode === 'edit' ? save() : null">save</div>
+    <div class="col-auto text-center">
+      <button v-if="mode === 'edit'" @click="save">save</button>
 
-      <div class="action" v-else-if="mode === 'delete'" @click="remove()">confirm</div>
+      <button v-else-if="mode === 'delete'" @click="remove">confirm</button>
 
-      <div class="action delete" v-else @click="confirm()">x</div>
+      <button class="delete" v-else @click="confirm">remove</button>
     </div>
   </div>
 </template>
@@ -160,14 +153,10 @@ export default {
 }
 
 .nsfw {
-  display: inline-block;
+  cursor: initial;
   user-select: none;
-  font-size: 32px;
-  line-height: 1;
-  margin-bottom: 0;
   opacity: 0.1;
   transition: 0.3s opacity;
-  padding-top: 6px;
 
   &.checked {
     opacity: 1;
@@ -175,7 +164,6 @@ export default {
 
   .state-edit & {
     cursor: pointer;
-
     &:hover {
       opacity: 1;
     }

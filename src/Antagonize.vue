@@ -79,4 +79,22 @@ hr {
 .push-bottom {
   margin-bottom: 45px;
 }
+
+button {
+  font-size: 10px;
+  border-radius: 2.5px;
+  line-height: 1;
+  background-color: transparent;
+  border-color: #e6e6e6;
+  color: #e6e6e6;
+  padding: 2.5px 5px;
+  font-weight: 300;
+  cursor: pointer;
+
+  &:hover,
+  &:active,
+  &:focus {
+    outline: 0;
+  }
+}
 </style>
