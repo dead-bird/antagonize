@@ -37,14 +37,29 @@ export default {
   <div>
     <h1>{{ route }}</h1>
 
-    <div v-for="item in results" :key="item._id">
-      <Form :pass="item" :route="route" @remove="remove" class="push-bottom" />
-    </div>
+    <transition-group name="list">
+      <div v-for="item in results" :key="item._id" class="list-item">
+        <Form :pass="item" :route="route" @remove="remove" class="push-bottom" />
+      </div>
+    </transition-group>
   </div>
 </template>
 
 <style lang="scss" scoped>
 h1 {
   text-transform: capitalize;
+}
+
+.list-item {
+  transition: all 0.4s;
+  position: relative;
+}
+.list-enter,
+.list-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+}
+.list-leave-active {
+  position: absolute;
 }
 </style>

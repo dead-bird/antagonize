@@ -73,8 +73,6 @@ export default {
       this.readOnly = true;
 
       this.time = setTimeout(() => {
-        console.log('reset');
-
         self.mode = false;
         self.backup = {};
       }, dur);
@@ -93,7 +91,6 @@ export default {
   <div class="row align-items-center push-bottom form" :class="`state-${mode}`">
     <div class="col">
       <input
-        class="text"
         type="text"
         v-model="item.text"
         @keyup.esc="cancel()"
@@ -122,7 +119,7 @@ export default {
   position: relative;
 }
 
-.text {
+input {
   width: 100%;
   display: block;
   background-color: transparent;
