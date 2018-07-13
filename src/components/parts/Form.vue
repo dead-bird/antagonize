@@ -13,14 +13,18 @@ export default {
       mode: false, // save, edit, cancel, delete
       backup: {},
       item: this.pass,
+      time: null,
+      readOnly: true,
     };
   },
 
   methods: {
     edit() {
+      clearTimeout(this.time);
+
       this.backup = Object.assign({}, this.item);
       this.mode = 'edit';
-      this.$refs.text.readOnly = false;
+      this.readOnly = false;
     },
 
     nsfw() {
@@ -48,25 +52,27 @@ export default {
         });
     },
 
-    confirm() {
-      this.mode = 'delete';
-    },
-
     remove() {
-      this.reset(0);
+      this.$emit('remove', this.item._id);
 
-      //   api.delete(this.path).then(() => {
-      //     console.log('deleted - need to $emit to tell parent to remove from list');
-      //     this.reset(0);
-      //   });
+      api
+        .delete(this.path)
+        .then(() => {
+          this.reset(0);
+        })
+        .catch(err => {
+          Notif.$emit('error', err.response.data);
+
+          this.$emit('add', this.item);
+        });
     },
 
     reset(dur = 2000) {
       const self = this;
 
-      this.$refs.text.readOnly = true;
+      this.readOnly = true;
 
-      setTimeout(() => {
+      this.time = setTimeout(() => {
         console.log('reset');
 
         self.mode = false;
@@ -88,12 +94,11 @@ export default {
     <div class="col">
       <input
         class="text"
-        ref="text"
         type="text"
         v-model="item.text"
         @keyup.esc="cancel()"
         @dblclick="edit"
-        readonly>
+        :readonly="readOnly">
 
         <Detail :item="item" />
     </div>
@@ -107,7 +112,7 @@ export default {
 
       <button v-else-if="mode === 'delete'" @click="remove">confirm</button>
 
-      <button class="delete" v-else @click="confirm">remove</button>
+      <button class="delete" v-else @click="mode = 'delete'">remove</button>
     </div>
   </div>
 </template>

@@ -35,12 +35,10 @@ export default {
 
 <template>
   <div>
-    <!-- <pre class="dump">{{results}}</pre> -->
     <h1>{{ route }}</h1>
-    <button @click="remove('5ada4ca6e7b5540315928be0')">remove</button>
+
     <div v-for="item in results" :key="item._id">
-      {{item._id}}
-      <Form :pass="item" :route="route" class="push-bottom" />
+      <Form :pass="item" :route="route" @remove="remove" class="push-bottom" />
     </div>
   </div>
 </template>
