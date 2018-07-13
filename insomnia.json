@@ -1,7 +1,7 @@
 {
 	"_type": "export",
 	"__export_format": 3,
-	"__export_date": "2018-07-10T22:15:16.983Z",
+	"__export_date": "2018-07-13T22:54:46.407Z",
 	"__export_source": "insomnia.desktop.app:v5.16.6",
 	"resources": [
 		{
@@ -67,6 +67,17 @@
 			"_type": "request_group"
 		},
 		{
+			"_id": "fld_ec290e540fc540a69d527a1c88a08f90",
+			"created": 1531346913345,
+			"description": "",
+			"environment": {},
+			"metaSortKey": -1531346913345,
+			"modified": 1531346913345,
+			"name": "Insults",
+			"parentId": "wrk_ca371d438430410ca705929a3386fdd8",
+			"_type": "request_group"
+		},
+		{
 			"_id": "env_79776d93c0f64ac8aebe84f8f8cb63be",
 			"color": "#7d69cb",
 			"created": 1531259666804,
@@ -128,7 +139,7 @@
 			"authentication": {},
 			"body": {
 				"mimeType": "application/json",
-				"text": "{\n\t\"text\": \"test\",\n\t\"nsfw\": false\n}"
+				"text": "{\n\t\"text\": \"test\",\n\t\"nsfw\": true\n}"
 			},
 			"created": 1531259847777,
 			"description": "",
@@ -142,7 +153,7 @@
 			"isPrivate": false,
 			"metaSortKey": -1531259654272,
 			"method": "POST",
-			"modified": 1531260412554,
+			"modified": 1531520555508,
 			"name": "Create",
 			"parameters": [],
 			"parentId": "fld_0e77f09324724cce9fb10588f96c670b",
@@ -174,6 +185,37 @@
 			"settingSendCookies": true,
 			"settingStoreCookies": true,
 			"url": "{{ api  }}nouns/5b452e1621a53503c1587d5e",
+			"_type": "request"
+		},
+		{
+			"_id": "req_e0a6a480210d4ae586d4d6f3f17fd740",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"text\": \"cunt\",\n\t\"nsfw\": true\n}"
+			},
+			"created": 1531347475823,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_9cf21b98f7b54e54bfd5ba4746a704b1",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1531259654247,
+			"method": "PUT",
+			"modified": 1531347508991,
+			"name": "Update",
+			"parameters": [],
+			"parentId": "fld_0e77f09324724cce9fb10588f96c670b",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ api  }}nouns/5ada4cb6e7b5540315928be3",
 			"_type": "request"
 		},
 		{
@@ -225,7 +267,7 @@
 			"authentication": {},
 			"body": {
 				"mimeType": "application/json",
-				"text": "{\n\t\"text\": \"test\",\n\t\"nsfw\": false\n}"
+				"text": "{\n\t\"text\": \"fucking\",\n\t\"nsfw\": true\n}"
 			},
 			"created": 1531260563220,
 			"description": "",
@@ -239,7 +281,7 @@
 			"isPrivate": false,
 			"metaSortKey": -1531259654272,
 			"method": "POST",
-			"modified": 1531260607737,
+			"modified": 1531520562991,
 			"name": "Create",
 			"parameters": [],
 			"parentId": "fld_88cdc66a89724d76aae8a5d4c0830638",
@@ -261,7 +303,7 @@
 			"isPrivate": false,
 			"metaSortKey": -1531259654222,
 			"method": "DELETE",
-			"modified": 1531260630569,
+			"modified": 1531431814915,
 			"name": "Delete",
 			"parameters": [],
 			"parentId": "fld_88cdc66a89724d76aae8a5d4c0830638",
@@ -270,7 +312,38 @@
 			"settingRebuildPath": true,
 			"settingSendCookies": true,
 			"settingStoreCookies": true,
-			"url": "{{ api  }}modifiers/5b452ec021a53503c1587d5f",
+			"url": "{{ api  }}modifiers/5ada4cb6e7b5540315928be3",
+			"_type": "request"
+		},
+		{
+			"_id": "req_d22e0c9c149e4d30804ab9769f5dbb5d",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"text\": \"stupid\",\n\t\"nsfw\": false\n}"
+			},
+			"created": 1531346704698,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_9cf21b98f7b54e54bfd5ba4746a704b1",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1531259654247,
+			"method": "PUT",
+			"modified": 1531346750366,
+			"name": "Update",
+			"parameters": [],
+			"parentId": "fld_88cdc66a89724d76aae8a5d4c0830638",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ api  }}modifiers/5ada4c9be7b5540315928bde",
 			"_type": "request"
 		},
 		{
@@ -355,6 +428,28 @@
 			"settingSendCookies": true,
 			"settingStoreCookies": true,
 			"url": "{{ api  }}users/login",
+			"_type": "request"
+		},
+		{
+			"_id": "req_0445741097a44f6e971b1d2cd4848076",
+			"authentication": {},
+			"body": {},
+			"created": 1531346906085,
+			"description": "",
+			"headers": [],
+			"isPrivate": false,
+			"metaSortKey": -1531346906085,
+			"method": "GET",
+			"modified": 1531346955953,
+			"name": "Show",
+			"parameters": [],
+			"parentId": "fld_ec290e540fc540a69d527a1c88a08f90",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ api  }}insult",
 			"_type": "request"
 		}
 	]
