@@ -13,7 +13,9 @@ export default {
 
     <Notif />
 
-    <router-view />
+    <transition name="page" mode="out-in">
+      <router-view />
+    </transition>
   </div>
 </template>
 
@@ -96,5 +98,14 @@ button {
   &:focus {
     outline: 0;
   }
+}
+
+.page-enter-active,
+.page-leave-active {
+  transition: all 0.3s ease-out;
+}
+.page-enter,
+.page-leave-to {
+  opacity: 0;
 }
 </style>
