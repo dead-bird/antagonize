@@ -1,12 +1,13 @@
 <script>
 import api from '@/resources/base';
-import Form from '@/components/parts/Form';
+import Form from '@/components/manage/Form';
+import New from '@/components/manage/New';
 import Notif from '@/event';
 
 export default {
   props: ['route'],
 
-  components: { Form },
+  components: { Form, New },
 
   data() {
     return { results: [] };
@@ -17,6 +18,10 @@ export default {
       const i = this.results.findIndex(el => el._id === id);
 
       if (i > -1) this.results.splice(i, 1);
+    },
+
+    add(item) {
+      this.results.push(item);
     },
   },
 
@@ -40,6 +45,10 @@ export default {
     <transition-group name="list">
       <div v-for="item in results" :key="item._id" class="list-item">
         <Form :pass="item" :route="route" @remove="remove" class="push-bottom" />
+      </div>
+
+      <div key="new" class="list-item">
+        <New :route="route" @add="add" />
       </div>
     </transition-group>
   </div>

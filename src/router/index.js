@@ -4,7 +4,7 @@ import Router from 'vue-router';
 import Home from '@/components/single/Home';
 
 import Login from '@/components/auth/Login';
-import Manage from '@/components/single/Manage';
+import Manage from '@/components/manage/Manage';
 
 import Users from '@/components/users/Users';
 import User from '@/components/users/User';

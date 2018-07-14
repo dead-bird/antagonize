@@ -1,7 +1,7 @@
 <script>
 import api from '@/resources/base';
 import Notif from '@/event';
-import Detail from '@/components/parts/Detail';
+import Detail from '@/components/manage/Detail';
 
 export default {
   props: ['route', 'pass'],

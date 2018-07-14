@@ -104,6 +104,7 @@ button {
 .page-leave-active {
   transition: all 0.3s ease-out;
 }
+
 .page-enter,
 .page-leave-to {
   opacity: 0;

@@ -1,5 +1,5 @@
 <script>
-import List from '@/components/parts/List';
+import List from '@/components/manage/List';
 
 export default {
   components: { List },
