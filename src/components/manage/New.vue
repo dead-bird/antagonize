@@ -8,7 +8,7 @@ export default {
   data() {
     return {
       mode: false,
-      item: {},
+      item: { nsfw: false },
       time: null,
     };
   },
@@ -16,26 +16,24 @@ export default {
   methods: {
     edit() {
       clearTimeout(this.time);
-
       this.mode = 'edit';
     },
 
     cancel() {
       this.mode = 'cancel';
-      this.item = {};
       this.reset();
     },
 
     save() {
-      if (!this.item.text || this.mode !== 'edit') return;
+      if (!this.item.text) return;
 
       this.mode = 'save';
-      this.$emit('add', this.item);
 
       api
-        .put(this.path, this.item)
-        .then(() => {
-          this.reset();
+        .post(this.route, this.item)
+        .then(res => {
+          this.$emit('add', res.data);
+          this.reset(0);
         })
         .catch(err => {
           this.$emit('remove', this.item);
@@ -47,6 +45,7 @@ export default {
       const self = this;
 
       this.time = setTimeout(() => {
+        self.item = { nsfw: false };
         self.mode = false;
       }, dur);
     },
@@ -56,27 +55,31 @@ export default {
 
 <template>
   <div class="row align-items-center push-bottom form" :class="`state-${mode}`">
-    <div class="col">
-      <input
-        type="text"
-        v-model="item.text"
-        @keyup.esc="reset()"
-        @dblclick="edit">
-    </div>
+    <template v-if="mode">
+      <div class="col">
+        <input
+          type="text"
+          v-model="item.text"
+          @keyup.esc="reset(0)"
+          @dblclick="edit"
+          autofocus>
+      </div>
 
-    <div class="col-auto text-center">
-      <button class="nsfw" :class="{checked: item.nsfw}" @click="item.nsfw = !item.nsfw">
-        nsfw
-      </button>
-    </div>
+      <div class="col-auto text-center">
+        <button class="nsfw" :class="{checked: item.nsfw}" @click="item.nsfw = !item.nsfw">
+          nsfw
+        </button>
+      </div>
 
-    <div class="col-auto text-center">
-      <button v-if="mode === 'edit'" @click="save">save</button>
+      <div class="col-auto text-center">
+        <button v-if="mode === 'edit'" @click="save">confirm</button>
+      </div>
+    </template>
 
-      <button v-else-if="mode === 'cancel'" @click="reset">confirm</button>
-
-      <button class="delete" v-else @click="mode = 'cancel'">cancel</button>
-    </div>
+    <template v-else>
+      <div class="col"></div>
+      <div class="col-auto"><button @click="edit">new</button></div>
+    </template>
   </div>
 </template>
 
