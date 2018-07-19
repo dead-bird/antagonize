@@ -30,14 +30,18 @@ export default {
     <div class="container">
       <h2>API Endpoint</h2>
       <pre v-highlightjs><code class="javascript">'{{ base }}'</code></pre>
+      
+      <div class="row align-items-center">
+        <div class="col"><h2>Example</h2></div>
 
-      <h2>
-        <select class="options" name="example" id="example" v-model="selected">
-          <option v-for="option in options" v-bind:value="option">
-            {{ option }} Example
-          </option>
-        </select>
-      </h2>
+        <div class="col-auto">
+          <button v-for="o in options" :key="o" @click="selected = o" :class="{active: selected === o}">
+            {{ o }}
+          </button>
+        </div>
+      </div>
+
+
 
       <component :is="selected" :base="base" />
 
@@ -53,5 +57,13 @@ export default {
   border: none;
   color: #e6e6e6;
   margin-left: -7px;
+}
+
+button {
+  margin-right: 15px;
+  padding: 5px 10px;
+}
+.active {
+  border-color: palegreen;
 }
 </style>

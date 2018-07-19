@@ -4,7 +4,7 @@ export default {
 
   data() {
     return {
-      sourcecode: `fetch('${this.base}').then(res => res.json());`,
+      sourcecode: `fetch('${this.base}').then(res => res.text);`,
     };
   },
 };
@@ -15,5 +15,4 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-
 </style>
