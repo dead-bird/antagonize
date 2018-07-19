@@ -4,8 +4,8 @@ let schema = new mongoose.Schema(
   {
     text: { type: String, required: true },
     nsfw: { type: Boolean, required: true },
-    author: String,
     date: { type: Date, default: Date.now },
+    author: { type: String, required: true },
   },
   { versionKey: false }
 );
