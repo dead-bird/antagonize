@@ -1,6 +1,12 @@
 <script>
 export default {
   props: ['item'],
+
+  computed: {
+    author() {
+      return this.item.author ? this.item.author.username : 'admin';
+    },
+  },
 };
 </script>
 
@@ -8,7 +14,7 @@ export default {
   <div class="detail">
     <span>added</span>
     <span>by</span>
-    <span>{{ item.author || 'admin' }}</span>
+    <span>{{ author }}</span>
     <span>on</span>
     <span>{{ item.date | moment("MM/DD/YY") }}.</span>
   </div>
@@ -29,7 +35,7 @@ export default {
   span {
     display: inline-block;
     transition-property: all;
-    transition-duration: .3s;
+    transition-duration: 0.3s;
     opacity: 0;
 
     @for $i from 1 through 10 {

@@ -1,4 +1,6 @@
 <script>
+/* eslint-disable no-param-reassign  */
+
 import api from '@/resources/base';
 import Form from '@/components/manage/Form';
 import New from '@/components/manage/New';
@@ -21,6 +23,8 @@ export default {
     },
 
     add(item) {
+      // if (item.author) item.author = this.$store.state.auth.user._id;
+
       this.results.push(item);
     },
   },

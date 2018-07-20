@@ -1,19 +1,17 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-let schema = new mongoose.Schema(
+let words = new Schema(
   {
     text: { type: String, required: true },
     nsfw: { type: Boolean, required: true },
     date: { type: Date, default: Date.now },
-    author: { type: String, required: true },
+    author: { type: Schema.Types.ObjectId, required: true, ref: 'Users' },
   },
   { versionKey: false }
 );
 
 module.exports = {
-  nouns: mongoose.model('Nouns', schema),
-  modifiers: mongoose.model('Modifiers', schema),
+  nouns: mongoose.model('Nouns', words),
+  modifiers: mongoose.model('Modifiers', words),
 };
-
-// export const nouns = mongoose.model('Nouns', schema);
-// export let modifiers = mongoose.model('Modifiers', schema);

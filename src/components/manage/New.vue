@@ -29,6 +29,8 @@ export default {
 
       this.mode = 'save';
 
+      this.item.author = this.$store.state.auth.user._id;
+
       api
         .post(this.route, this.item)
         .then(res => {

@@ -4,28 +4,34 @@ const router = express.Router();
 
 /* List */
 router.get('/', (req, res, next) => {
-  Words[word(req)].find((err, nouns) => {
-    if (err) return next(err);
+  Words[word(req)]
+    .find()
+    .populate('author', 'username')
+    .exec((err, words) => {
+      if (err) return next(err);
 
-    res.json(nouns);
-  });
+      res.json(words);
+    });
 });
 
 /* Show */
 router.get('/:id', (req, res, next) => {
-  Words[word(req)].findById(req.params.id, (err, noun) => {
-    if (err) return next(err);
+  Words[word(req)]
+    .findById(req.params.id)
+    .populate('author', 'username')
+    .exec((err, word) => {
+      if (err) return next(err);
 
-    res.json(noun);
-  });
+      res.json(word);
+    });
 });
 
 /* Create */
 router.post('/', (req, res, next) => {
-  Words[word(req)].create(req.body, (err, noun) => {
+  Words[word(req)].create(req.body, (err, word) => {
     if (err) return next(err);
 
-    res.json(noun);
+    res.json(word);
   });
 });
 
@@ -35,20 +41,20 @@ router.put('/:id', (req, res, next) => {
     req.params.id,
     req.body,
     { upsert: true },
-    (err, noun) => {
+    (err, word) => {
       if (err) return next(err);
 
-      return res.json(noun);
+      return res.json(word);
     }
   );
 });
 
 /* Delete */
 router.delete('/:id', (req, res, next) => {
-  Words[word(req)].remove({ _id: req.params.id }, (err, noun) => {
+  Words[word(req)].remove({ _id: req.params.id }, (err, word) => {
     if (err) return next(err);
 
-    return res.json(noun);
+    return res.json(word);
   });
 });
 
