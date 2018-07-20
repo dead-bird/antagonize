@@ -1,7 +1,7 @@
 {
 	"_type": "export",
 	"__export_format": 3,
-	"__export_date": "2018-07-13T22:54:46.407Z",
+	"__export_date": "2018-07-20T23:13:12.301Z",
 	"__export_source": "insomnia.desktop.app:v5.16.6",
 	"resources": [
 		{
@@ -139,7 +139,7 @@
 			"authentication": {},
 			"body": {
 				"mimeType": "application/json",
-				"text": "{\n\t\"text\": \"test\",\n\t\"nsfw\": true\n}"
+				"text": "{\n\t\"text\": \"test\",\n\t\"nsfw\": true,\n\t\"author\": \"5af811525b968a0578cfb969\"\n}"
 			},
 			"created": 1531259847777,
 			"description": "",
@@ -153,7 +153,7 @@
 			"isPrivate": false,
 			"metaSortKey": -1531259654272,
 			"method": "POST",
-			"modified": 1531520555508,
+			"modified": 1532127481529,
 			"name": "Create",
 			"parameters": [],
 			"parentId": "fld_0e77f09324724cce9fb10588f96c670b",
@@ -250,7 +250,7 @@
 			"isPrivate": false,
 			"metaSortKey": -1531259654322,
 			"method": "GET",
-			"modified": 1531260596053,
+			"modified": 1532127216491,
 			"name": "Show",
 			"parameters": [],
 			"parentId": "fld_88cdc66a89724d76aae8a5d4c0830638",
@@ -259,7 +259,7 @@
 			"settingRebuildPath": true,
 			"settingSendCookies": true,
 			"settingStoreCookies": true,
-			"url": "{{ api  }}modifiers/5ada4c9be7b5540315928bde",
+			"url": "{{ api  }}modifiers/5b510e860b6bf7049e9fb807",
 			"_type": "request"
 		},
 		{
@@ -267,7 +267,7 @@
 			"authentication": {},
 			"body": {
 				"mimeType": "application/json",
-				"text": "{\n\t\"text\": \"fucking\",\n\t\"nsfw\": true\n}"
+				"text": "{\n\t\"text\": \"fucking\",\n\t\"nsfw\": true,\n\t\"author\": \"5af811525b968a0578cfb969\"\n}"
 			},
 			"created": 1531260563220,
 			"description": "",
@@ -281,7 +281,7 @@
 			"isPrivate": false,
 			"metaSortKey": -1531259654272,
 			"method": "POST",
-			"modified": 1531520562991,
+			"modified": 1532038788597,
 			"name": "Create",
 			"parameters": [],
 			"parentId": "fld_88cdc66a89724d76aae8a5d4c0830638",
@@ -334,7 +334,7 @@
 			"isPrivate": false,
 			"metaSortKey": -1531259654247,
 			"method": "PUT",
-			"modified": 1531346750366,
+			"modified": 1532127502461,
 			"name": "Update",
 			"parameters": [],
 			"parentId": "fld_88cdc66a89724d76aae8a5d4c0830638",
