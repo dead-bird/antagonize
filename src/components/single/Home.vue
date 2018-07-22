@@ -3,11 +3,10 @@ import Words from '@/components/parts/Words';
 import Insult from '@/components/insults/Insult';
 import Example from '@/components/examples/Example';
 import Define from '@/components/parts/Define';
-
-import Test from '@/components/auth/test';
+import Shark from '@/components/parts/Shark';
 
 export default {
-  components: { Words, Insult, Example, Define, Test },
+  components: { Words, Insult, Example, Define, Shark },
 };
 </script>
 
@@ -19,11 +18,13 @@ export default {
 
         <Insult />
       </div>
-
-      <Example />
     </div>
 
-    <!-- <Test /> -->
+      <Shark />
+
+    <div class="container">
+      <Example />
+    </div>
 
     <Define />
   </section>

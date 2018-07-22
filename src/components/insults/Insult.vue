@@ -78,10 +78,10 @@ export default {
 <style lang="scss" scoped>
 .insult {
   font-size: 32px;
-  margin-bottom: 15vh;
+  margin-bottom: 5vh;
 
   @media (min-width: 1200px) {
-    margin-bottom: 10vh;
+    margin-bottom: 5vh;
   }
 }
 
