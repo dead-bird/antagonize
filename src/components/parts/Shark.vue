@@ -2,9 +2,9 @@
   <div class="sharky-con">
     
 
-    <!-- <div class="container"> -->
-      <img class="sharky" src="@/assets/sharky.svg" alt="">
-    <!-- </div> -->
+    <div class="sharky container">
+      <img src="@/assets/sharky.svg" alt="">
+    </div>
 
     <div class="waves"></div>
   </div>
@@ -14,8 +14,8 @@
 .sharky-con {
   position: relative;
   height: 300px;
-  margin-bottom: 60px;
   overflow: hidden;
+  margin-bottom: -1px;
 }
 
 .container {
@@ -25,10 +25,16 @@
 .sharky {
   position: absolute;
   bottom: -40px;
+  left: 0;
   right: 0;
-  width: 200px;
-  transform: rotate(10deg);
   z-index: 1;
+  padding: 0;
+  text-align: right;
+
+  img {
+    transform: rotate(10deg);
+    width: 200px;
+  }
 }
 
 .waves {

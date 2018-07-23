@@ -11,24 +11,33 @@ export default {
 </script>
 
 <template>
-  <section>
-    <div class="container">
-      <div class="col">
-        <Words />
+  <div>
+    <section>
+      <div class="container">
+        <div class="col">
+          <Words />
 
-        <Insult />
+          <Insult />
+        </div>
       </div>
-    </div>
 
       <Shark />
+    </section>
 
-    <div class="container">
-      <Example />
-    </div>
 
-    <Define />
-  </section>
+    <section class="ocean">
+      <div class="container">
+        <Example />
+      </div>
+
+      <Define />
+    </section>
+  </div>
 </template>
 
 <style lang="scss" scoped>
+.ocean {
+  padding-top: 60px;
+  background-color: #22313f;
+}
 </style>
