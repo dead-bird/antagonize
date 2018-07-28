@@ -30,12 +30,15 @@ export default {
         .post('users/login', this.user)
         .then(res => {
           Notif.$emit('success', `Welcome back, ${res.data.username}`);
-
           this.$store.commit('login', res.data);
           this.$router.push('/manage');
         })
         .catch(err => {
-          Notif.$emit('error', err.response.data);
+          let msg = 'an error occured';
+
+          if (err.response) msg = err.response.data;
+
+          Notif.$emit('error', msg);
         });
     },
   },
@@ -99,9 +102,9 @@ input {
   height: 40px;
   display: block;
   border: none;
-  border-bottom: 1px solid #fff;
+  border-bottom: 1px solid #e6e6e6;
   background-color: transparent;
-  color: #fff;
+  color: #e6e6e6;
   font-size: 28px;
 
   &:focus {

@@ -19,7 +19,7 @@ export default {
         <div class="col">
           <router-link class="nav-item" to="/">Home</router-link>
           <router-link class="nav-item" to="/manage">Manage</router-link>
-          <router-link class="nav-item" to="/users">Users</router-link>
+          <!-- <router-link class="nav-item" to="/users">Users</router-link> -->
         </div>
 
         <div class="col-auto">

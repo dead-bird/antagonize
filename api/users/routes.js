@@ -93,7 +93,7 @@ router.post('/auth', (req, res, next) => {
 function gravatar(email) {
   if (!email) return '';
 
-  return `https://www.gravatar.com/avatar/${md5(email)}?s=200`;
+  return `https://www.gravatar.com/avatar/${md5(email)}?s=400`;
 }
 
 module.exports = router;
