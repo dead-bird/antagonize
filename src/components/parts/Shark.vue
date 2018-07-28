@@ -1,7 +1,5 @@
 <template>
   <div class="sharky-con">
-    
-
     <div class="sharky container">
       <img src="@/assets/sharky.svg" alt="">
     </div>

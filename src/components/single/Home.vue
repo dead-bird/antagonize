@@ -21,7 +21,7 @@ export default {
         </div>
       </div>
 
-      <Shark />
+      <!-- <Shark /> -->
     </section>
 
 
@@ -38,6 +38,6 @@ export default {
 <style lang="scss" scoped>
 .ocean {
   padding-top: 60px;
-  background-color: #22313f;
+  // background-color: #22313f;
 }
 </style>
