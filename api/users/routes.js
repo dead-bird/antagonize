@@ -9,85 +9,93 @@ const salt = 10;
 
 /* Get All Users */
 router.get('/', (req, res, next) => {
-  Users.find((err, users) => {
-    if (err) return next(err);
+  res.json([]);
 
-    let data = users.map(user => {
-      user = user.toObject();
-      delete user.password;
+  // Users.find((err, users) => {
+  //   if (err) return next(err);
 
-      user.avatar = gravatar(user.email);
+  //   let data = users.map(user => {
+  //     user = user.toObject();
+  //     delete user.password;
 
-      return user;
-    });
+  //     user.avatar = gravatar(user.email);
 
-    res.json(data);
-  });
+  //     return user;
+  //   });
+
+  //   res.json(data);
+  // });
 });
 
 /* Create new User */
 router.post('/', (req, res, next) => {
-  bcrypt.hash(req.body.password, salt, (err, hash) => {
-    if (err) return next(err);
+  res.json([]);
 
-    let user = { username: req.body.username, password: hash };
+  // bcrypt.hash(req.body.password, salt, (err, hash) => {
+  //   if (err) return next(err);
 
-    Users.create(user, (err, user) => {
-      if (err) return next(err);
+  //   let user = { username: req.body.username, password: hash };
 
-      user.avatar = gravatar(user.email);
+  //   Users.create(user, (err, user) => {
+  //     if (err) return next(err);
 
-      res.json(user);
-    });
-  });
+  //     user.avatar = gravatar(user.email);
+
+  //     res.json(user);
+  //   });
+  // });
 });
 
 /* Login */
 router.post('/login', (req, res, next) => {
-  Users.findOne({ username: { $eq: req.body.username } }, (err, user) => {
-    if (err) return next(err);
+  res.json([]);
 
-    if (!user) return res.status(404).send('User not found');
+  // Users.findOne({ username: { $eq: req.body.username } }, (err, user) => {
+  //   if (err) return next(err);
 
-    bcrypt.compare(req.body.password, user.password, (err, match) => {
-      if (err) return next(err);
+  //   if (!user) return res.status(404).send('User not found');
 
-      if (!match) return res.status(403).send('Incorrect username or password');
+  //   bcrypt.compare(req.body.password, user.password, (err, match) => {
+  //     if (err) return next(err);
 
-      jwt.sign({ id: user._id }, secret, { expiresIn: '1h' }, (err, token) => {
-        if (err) return error.handle(res, err);
+  //     if (!match) return res.status(403).send('Incorrect username or password');
 
-        user = user.toObject();
+  //     jwt.sign({ id: user._id }, secret, { expiresIn: '1h' }, (err, token) => {
+  //       if (err) return error.handle(res, err);
 
-        delete user.password;
-        user.token = token;
-        user.avatar = gravatar(user.email);
+  //       user = user.toObject();
 
-        res.json(user);
-      });
-    });
-  });
+  //       delete user.password;
+  //       user.token = token;
+  //       user.avatar = gravatar(user.email);
+
+  //       res.json(user);
+  //     });
+  //   });
+  // });
 });
 
 /* Authenticate Token */
 router.post('/auth', (req, res, next) => {
-  jwt.verify(req.body.token, secret, (err, decoded) => {
-    if (err) return next(err);
+  res.json([]);
 
-    Users.findOne({ _id: { $eq: decoded.id } }, (err, user) => {
-      if (err) return next(err);
+  // jwt.verify(req.body.token, secret, (err, decoded) => {
+  //   if (err) return next(err);
 
-      if (!user) return res.status(404).send('User not found');
+  //   Users.findOne({ _id: { $eq: decoded.id } }, (err, user) => {
+  //     if (err) return next(err);
 
-      user = user.toObject();
+  //     if (!user) return res.status(404).send('User not found');
 
-      user.avatar = gravatar(user.email);
+  //     user = user.toObject();
 
-      delete user.password;
+  //     user.avatar = gravatar(user.email);
 
-      res.json(user);
-    });
-  });
+  //     delete user.password;
+
+  //     res.json(user);
+  //   });
+  // });
 });
 
 function gravatar(email) {
