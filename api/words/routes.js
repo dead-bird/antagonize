@@ -1,4 +1,5 @@
 const Words = require('./model.js');
+const auth = require('../auth.js');
 const express = require('express');
 const router = express.Router();
 
@@ -28,40 +29,46 @@ router.get('/:id', (req, res, next) => {
 
 /* Create */
 router.post('/', (req, res, next) => {
-  res.json([]);
+  auth(req.headers.authorization)
+    .then(() => {
+      Words[word(req)].create(req.body, (err, word) => {
+        if (err) return next(err);
 
-  // Words[word(req)].create(req.body, (err, word) => {
-  //   if (err) return next(err);
-
-  //   res.json(word);
-  // });
+        res.json(word);
+      });
+    })
+    .catch(msg => res.status(401).send(msg || null));
 });
 
 /* Update */
 router.put('/:id', (req, res, next) => {
-  res.json([]);
+  auth(req.headers.authorization)
+    .then(() => {
+      Words[word(req)].findByIdAndUpdate(
+        req.params.id,
+        req.body,
+        { upsert: true },
+        (err, word) => {
+          if (err) return next(err);
 
-  // Words[word(req)].findByIdAndUpdate(
-  //   req.params.id,
-  //   req.body,
-  //   { upsert: true },
-  //   (err, word) => {
-  //     if (err) return next(err);
-
-  //     return res.json(word);
-  //   }
-  // );
+          return res.json(word);
+        }
+      );
+    })
+    .catch(msg => res.status(401).send(msg || null));
 });
 
 /* Delete */
 router.delete('/:id', (req, res, next) => {
-  res.json([]);
+  auth(req.headers.authorization)
+    .then(() => {
+      Words[word(req)].remove({ _id: req.params.id }, (err, word) => {
+        if (err) return next(err);
 
-  // Words[word(req)].remove({ _id: req.params.id }, (err, word) => {
-  //   if (err) return next(err);
-
-  //   return res.json(word);
-  // });
+        return res.json(word);
+      });
+    })
+    .catch(msg => res.status(401).send(msg || null));
 });
 
 function word(route) {
