@@ -34,12 +34,9 @@ export default {
 
 <template>
   <div class="notif-bar">
-
     <transition-group name="list">
       <div class="notif" :class="notif.type" v-for="notif in notifs" :key="notif.message">
-        <div class="container">
-          {{ notif.message }}
-        </div>
+        <div class="container">{{ notif.message }}</div>
       </div>
     </transition-group>
   </div>
@@ -48,7 +45,7 @@ export default {
 <style lang="scss">
 .notif-bar {
   width: 100%;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   z-index: 1;
