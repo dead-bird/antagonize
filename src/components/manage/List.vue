@@ -48,11 +48,11 @@ export default {
 
     <transition-group name="list">
       <div v-for="item in results" :key="item._id" class="list-item">
-        <Form :pass="item" :route="route" @remove="remove" class="push-bottom" />
+        <Form :pass="item" :route="route" @remove="remove" class="push-bottom"/>
       </div>
 
       <div key="new" class="list-item">
-        <New :route="route" @add="add" />
+        <New :route="route" @add="add"/>
       </div>
     </transition-group>
   </div>

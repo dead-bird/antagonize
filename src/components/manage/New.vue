@@ -59,18 +59,11 @@ export default {
   <div class="row align-items-center push-bottom form" :class="`state-${mode}`">
     <template v-if="mode">
       <div class="col">
-        <input
-          type="text"
-          v-model="item.text"
-          @keyup.esc="reset(0)"
-          @dblclick="edit"
-          autofocus>
+        <input type="text" v-model="item.text" @keyup.esc="reset(0)" @dblclick="edit" autofocus>
       </div>
 
       <div class="col-auto text-center">
-        <button class="nsfw" :class="{checked: item.nsfw}" @click="item.nsfw = !item.nsfw">
-          nsfw
-        </button>
+        <button class="nsfw" :class="{checked: item.nsfw}" @click="item.nsfw = !item.nsfw">nsfw</button>
       </div>
 
       <div class="col-auto text-center">
@@ -80,7 +73,9 @@ export default {
 
     <template v-else>
       <div class="col"></div>
-      <div class="col-auto"><button @click="edit">new</button></div>
+      <div class="col-auto">
+        <button @click="edit">new</button>
+      </div>
     </template>
   </div>
 </template>
