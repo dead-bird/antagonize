@@ -38,11 +38,20 @@ module.exports = {
         optionalDependencies: ['test/unit/index.js'],
       },
     ],
-    'no-underscore-dangle': ["error", { "allow": ["_id"] }],
-
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
     'no-console': process.env.NODE_ENV === 'production' ? 2 : 0,
     'arrow-parens': [2, 'as-needed'],
+    'no-mixed-operators': 0,
+    'comma-dangle': [
+      'error',
+      {
+        arrays: 'always-multiline',
+        objects: 'always-multiline',
+        imports: 'always-multiline',
+        exports: 'always-multiline',
+        functions: 'ignore',
+      },
+    ],
   },
 };
