@@ -8,7 +8,7 @@ module.exports = function(bearer) {
     }
 
     jwt.verify(bearer.split(' ')[1], secret, (err, decoded) => {
-      if (err) return reject();
+      if (err) return reject('Invalid or missing token.');
 
       resolve(decoded.id);
     });
