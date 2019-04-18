@@ -15,6 +15,11 @@ export default {
       item: this.pass,
       time: null,
       readOnly: true,
+      config: {
+        headers: {
+          Authorization: `Bearer ${this.$store.state.auth.user.token}`,
+        },
+      },
     };
   },
 
@@ -43,7 +48,7 @@ export default {
       this.mode = 'save';
 
       api
-        .put(this.path, this.item)
+        .put(this.path, this.item, this.config)
         .then(() => {
           this.reset();
         })
@@ -53,17 +58,17 @@ export default {
     },
 
     remove() {
-      this.$emit('remove', this.item._id);
+      console.log(this.config);
 
       api
-        .delete(this.path)
+        .delete(this.path, this.config)
         .then(() => {
           this.reset(0);
+          this.$emit('remove', this.item._id);
         })
         .catch(err => {
+          this.reset();
           Notif.$emit('error', err.response.data);
-
-          this.$emit('add', this.item);
         });
     },
 
@@ -95,9 +100,10 @@ export default {
         v-model="item.text"
         @keyup.esc="cancel()"
         @dblclick="edit"
-        :readonly="readOnly">
+        :readonly="readOnly"
+      >
 
-        <Detail :item="item" />
+      <Detail :item="item"/>
     </div>
 
     <div class="col-auto text-center">
