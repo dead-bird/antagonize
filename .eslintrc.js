@@ -43,6 +43,7 @@ module.exports = {
     'no-console': process.env.NODE_ENV === 'production' ? 2 : 0,
     'arrow-parens': [2, 'as-needed'],
     'no-mixed-operators': 0,
+    'no-underscore-dangle': 0,
     'comma-dangle': [
       'error',
       {
