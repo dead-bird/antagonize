@@ -15,11 +15,6 @@ export default {
       item: this.pass,
       time: null,
       readOnly: true,
-      config: {
-        headers: {
-          Authorization: `Bearer ${this.$store.state.auth.user.token}`,
-        },
-      },
     };
   },
 
@@ -58,8 +53,6 @@ export default {
     },
 
     remove() {
-      console.log(this.config);
-
       api
         .delete(this.path, this.config)
         .then(() => {
@@ -87,6 +80,14 @@ export default {
   computed: {
     path() {
       return `${this.route}/${this.item._id}`;
+    },
+
+    config() {
+      return {
+        headers: {
+          Authorization: `Bearer ${this.$store.state.auth.user.token}`,
+        },
+      };
     },
   },
 };

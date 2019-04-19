@@ -40,6 +40,7 @@ export default {
         .catch(err => {
           console.error(err);
 
+          state.user = {};
           state.loggedIn = false;
           localStorage.removeItem('user');
         });
