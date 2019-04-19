@@ -11,7 +11,7 @@ export default {
 </script>
 
 <template>
-  <div class="detail">
+  <div v-if="item.date" class="detail">
     <span>added</span>
     <span>by</span>
     <span>{{ author }}</span>
