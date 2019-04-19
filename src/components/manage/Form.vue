@@ -4,7 +4,11 @@ import Notif from '@/event';
 import Detail from '@/components/manage/Detail';
 
 export default {
-  props: ['route', 'pass'],
+  props: {
+    route: { type: String },
+    pass: { type: Object },
+    mode: { type: String, default: false },
+  },
 
   components: { Detail },
 

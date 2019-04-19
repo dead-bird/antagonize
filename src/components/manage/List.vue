@@ -12,7 +12,7 @@ export default {
   components: { Form, New },
 
   data() {
-    return { results: [] };
+    return { results: [], addNew: false };
   },
 
   methods: {
@@ -26,6 +26,12 @@ export default {
       // if (item.author) item.author = this.$store.state.auth.user._id;
 
       this.results.push(item);
+    },
+  },
+
+  computed: {
+    singular() {
+      return this.route.replace('s', '');
     },
   },
 
@@ -52,7 +58,13 @@ export default {
       </div>
 
       <div key="new" class="list-item">
-        <New :route="route" @add="add"/>
+        <button class="btn" @click="addNew = !addNew">
+          <template v-if="!addNew">Add {{ singular }}</template>
+          <template v-else>Cancel</template>
+        </button>
+
+        <Form v-if="addNew" mode="edit" :pass="{}" :route="route" @remove="remove"/>
+        <!-- <New :route="route" @add="add"/> -->
       </div>
     </transition-group>
   </div>
