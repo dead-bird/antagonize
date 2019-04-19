@@ -7,9 +7,7 @@ import Notif from '@/event';
 
 export default {
   data() {
-    return {
-      user: { username: '', password: '' },
-    };
+    return { user: {} };
   },
 
   methods: {
@@ -26,6 +24,8 @@ export default {
     },
 
     login() {
+      console.log('login');
+
       api
         .post('users/login', this.user)
         .then(res => {
@@ -55,7 +55,7 @@ export default {
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-5">
-        <div class="login">
+        <form @submit="login" class="login">
           <div class="form-group">
             <label ref="username" for="username">Username</label>
             <input
@@ -80,8 +80,8 @@ export default {
             >
           </div>
 
-          <button class="btn" @click="login">Login</button>
-        </div>
+          <button type="submit" class="btn">Login</button>
+        </form>
       </div>
     </div>
   </div>
