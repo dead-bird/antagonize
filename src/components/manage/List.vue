@@ -23,8 +23,7 @@ export default {
     },
 
     add(item) {
-      // if (item.author) item.author = this.$store.state.auth.user._id;
-
+      this.addNew = false;
       this.results.push(item);
     },
   },
@@ -63,7 +62,7 @@ export default {
           <template v-else>Cancel</template>
         </button>
 
-        <Form v-if="addNew" mode="edit" :pass="{}" :route="route" @remove="remove"/>
+        <Form v-if="addNew" state="edit" :route="route" @remove="remove" @add="add"/>
         <!-- <New :route="route" @add="add"/> -->
       </div>
     </transition-group>

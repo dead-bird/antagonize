@@ -6,8 +6,8 @@ import Detail from '@/components/manage/Detail';
 export default {
   props: {
     route: { type: String },
-    pass: { type: Object },
-    mode: { type: String, default: false },
+    state: { type: String, default: null },
+    pass: { type: Object, default: () => ({ text: '', nsfw: false }) },
   },
 
   components: { Detail },
@@ -16,7 +16,7 @@ export default {
     return {
       mode: false, // save, edit, cancel, delete
       backup: {},
-      item: this.pass,
+      item: {},
       time: null,
       readOnly: true,
     };
@@ -44,14 +44,36 @@ export default {
     save() {
       if (!this.item.text || this.mode !== 'edit') return;
 
+      let url = this.path;
+      let method = 'put';
+
+      if (!this.item._id) {
+        this.item.author = this.$store.state.auth.user._id;
+
+        url = this.route;
+        method = 'post';
+      }
+
+      const config = {
+        data: this.item,
+        method,
+        url,
+        ...this.config,
+      };
+
       this.mode = 'save';
 
-      api
-        .put(this.path, this.item, this.config)
-        .then(() => {
+      api(config)
+        .then(res => {
           this.reset();
+
+          if (!this.item._id) {
+            this.item = {};
+            this.$emit('add', res.data);
+          }
         })
         .catch(err => {
+          this.reset();
           Notif.$emit('error', err.response.data);
         });
     },
@@ -94,6 +116,16 @@ export default {
       };
     },
   },
+
+  mounted() {
+    this.item = this.pass;
+    this.mode = this.state;
+
+    if (this.mode === 'edit') {
+      this.readOnly = false;
+      this.$refs.text.focus();
+    }
+  },
 };
 </script>
 
@@ -101,6 +133,7 @@ export default {
   <div class="row align-items-center push-bottom form" :class="`state-${mode}`">
     <div class="col">
       <input
+        ref="text"
         type="text"
         v-model="item.text"
         @keyup.esc="cancel()"
@@ -112,7 +145,7 @@ export default {
     </div>
 
     <div class="col-auto text-center">
-      <button class="nsfw" :class="{checked: item.nsfw}" @click="nsfw">nsfw</button>
+      <button class="nsfw" :class="{ checked: item.nsfw }" @click="nsfw">nsfw</button>
     </div>
 
     <div class="col-auto text-center">
