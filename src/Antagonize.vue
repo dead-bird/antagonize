@@ -9,12 +9,12 @@ export default {
 
 <template>
   <div id="antagonize">
-    <Top />
+    <Top/>
 
-    <Notif />
+    <Notif/>
 
     <transition name="page" mode="out-in">
-      <router-view />
+      <router-view/>
     </transition>
   </div>
 </template>
@@ -97,6 +97,23 @@ button {
   &:active,
   &:focus {
     outline: 0;
+  }
+}
+
+.btn {
+  // float: right;
+  padding-left: 30px;
+  padding-right: 30px;
+  border: 1px solid white;
+  // border-radius: 0;
+  background-color: transparent;
+  color: #fff;
+  text-transform: capitalize;
+  margin-bottom: 30px;
+
+  &:hover {
+    background-color: #fff;
+    color: #222325;
   }
 }
 

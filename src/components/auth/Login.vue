@@ -125,19 +125,4 @@ label {
     font-size: 14px;
   }
 }
-
-.btn {
-  float: right;
-  padding-left: 30px;
-  padding-right: 30px;
-  border: 1px solid white;
-  // border-radius: 0;
-  background-color: transparent;
-  color: #fff;
-
-  &:hover {
-    background-color: #fff;
-    color: #222325;
-  }
-}
 </style>
