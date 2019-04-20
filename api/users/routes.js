@@ -66,6 +66,19 @@ router.put('/:id', (req, res, next) => {
     .catch(msg => res.status(401).send(msg || null));
 });
 
+/* Delete User */
+router.delete('/:id', (req, res, next) => {
+  auth(req.headers.authorization)
+    .then(() => {
+      Users.remove({ _id: req.params.id }, (err, data) => {
+        if (err) return next(err);
+
+        return res.json(data);
+      });
+    })
+    .catch(msg => res.status(401).send(msg || null));
+});
+
 /* Login */
 router.post('/login', (req, res, next) => {
   Users.findOne({ username: { $eq: req.body.username } }, (err, user) => {
