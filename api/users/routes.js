@@ -40,6 +40,32 @@ router.post('/', (req, res, next) => {
     .catch(msg => res.status(401).send(msg || null));
 });
 
+/* Update User */
+router.put('/:id', (req, res, next) => {
+  auth(req.headers.authorization)
+    .then(() => {
+      bcrypt.hash(req.body.password || 'xxxxxx', salt, (err, hash) => {
+        if (err) return next(err);
+
+        if (req.body.password) {
+          req.body.password = hash;
+        }
+
+        Users.findByIdAndUpdate(
+          req.params.id,
+          req.body,
+          { upsert: true },
+          (err, user) => {
+            if (err) return next(err);
+
+            return res.json(formatUser(user));
+          }
+        );
+      });
+    })
+    .catch(msg => res.status(401).send(msg || null));
+});
+
 /* Login */
 router.post('/login', (req, res, next) => {
   Users.findOne({ username: { $eq: req.body.username } }, (err, user) => {
@@ -89,7 +115,7 @@ function formatUser(user) {
 
   user.avatar = gravatar(user.email);
 
-  delete user.password;
+  // delete user.password;
 
   return user;
 }
