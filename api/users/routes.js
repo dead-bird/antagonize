@@ -115,7 +115,7 @@ function formatUser(user) {
 
   user.avatar = gravatar(user.email);
 
-  // delete user.password;
+  delete user.password;
 
   return user;
 }
