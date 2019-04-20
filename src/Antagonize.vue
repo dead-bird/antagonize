@@ -20,6 +20,7 @@ export default {
 </template>
 
 <style lang="scss">
+html,
 body {
   background-color: #222325;
   color: #e6e6e6;

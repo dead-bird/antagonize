@@ -22,38 +22,40 @@ export default {
 </script>
 
 <template>
-  <div v-if="user">
-    <div class="profile-deets">
-      <router-link :to="`/users/${user._id}`" class="profile-name">
-        {{ user.username }}
-      </router-link>
-
-      <div class="exit" @click="exit">Logout</div>
-    </div>
-
+  <div class="user-flex" v-if="user">
     <router-link :to="`/users/${user._id}`" class="profile-image">
       <img :src="user.avatar" :alt="user.username">
     </router-link>
+
+    <div class="profile-deets">
+      <router-link :to="`/users/${user._id}`" class="profile-name">Hello, {{ user.username }}</router-link>
+
+      <div class="exit" @click="exit">&larr; Logout</div>
+    </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
+.user-flex {
+  display: flex;
+  align-items: center;
+}
+
 .profile-image {
-  display: block;
-  float: right;
-  padding: 2.5px 7.5px;
+  padding: 2.5px 15px;
+  padding-left: 0;
   border-right: 1px solid #e6e6e6;
 
   img {
     border-radius: 50%;
-    width: 38px;
-    height: 38px;
+    width: 40px;
+    height: 40px;
   }
 }
 
 .profile-deets {
-  float: right;
-  padding: 2.5px 7.5px;
+  padding: 2.5px 25px;
+  padding-right: 0;
 }
 
 .profile-name {
@@ -63,6 +65,7 @@ export default {
 }
 
 .exit {
+  margin-left: -14px;
   cursor: pointer;
   font-size: 12px;
 }
