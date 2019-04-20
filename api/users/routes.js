@@ -15,16 +15,7 @@ router.get('/', (req, res, next) => {
       Users.find((err, users) => {
         if (err) return next(err);
 
-        let data = users.map(user => {
-          user = user.toObject();
-          delete user.password;
-
-          user.avatar = gravatar(user.email);
-
-          return user;
-        });
-
-        res.json(data);
+        res.json(users.map(user => formatUser(user)));
       });
     })
     .catch(msg => res.status(401).send(msg || null));
@@ -42,9 +33,7 @@ router.post('/', (req, res, next) => {
         Users.create(user, (err, user) => {
           if (err) return next(err);
 
-          user.avatar = gravatar(user.email);
-
-          res.json(user);
+          res.json(formatUser(user));
         });
       });
     })
@@ -66,11 +55,8 @@ router.post('/login', (req, res, next) => {
       jwt.sign({ id: user._id }, secret, { expiresIn: '1h' }, (err, token) => {
         if (err) return error.handle(res, err);
 
-        user = user.toObject();
-
-        delete user.password;
+        user = formatUser(user);
         user.token = token;
-        user.avatar = gravatar(user.email);
 
         res.json(user);
       });
@@ -85,16 +71,9 @@ router.post('/auth', (req, res, next) => {
 
     Users.findOne({ _id: { $eq: decoded.id } }, (err, user) => {
       if (err) return next(err);
-
       if (!user) return res.status(404).send('User not found');
 
-      user = user.toObject();
-
-      user.avatar = gravatar(user.email);
-
-      delete user.password;
-
-      res.json(user);
+      res.json(formatUser(user));
     });
   });
 });
@@ -103,6 +82,16 @@ function gravatar(email) {
   if (!email) return '';
 
   return `https://www.gravatar.com/avatar/${md5(email)}?s=400`;
+}
+
+function formatUser(user) {
+  user = user.toObject();
+
+  user.avatar = gravatar(user.email);
+
+  delete user.password;
+
+  return user;
 }
 
 module.exports = router;
