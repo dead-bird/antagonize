@@ -2,30 +2,24 @@
 /* eslint-disable no-return-assign */
 /* eslint-disable consistent-return */
 
+import FormInput from '@/components/auth/FormInput';
 import api from '@/resources/base';
 import Notif from '@/event';
 
 export default {
+  components: { FormInput },
+
   data() {
-    return { user: {} };
+    return {
+      user: {
+        username: '',
+        password: '',
+      },
+    };
   },
 
   methods: {
-    edit(el) {
-      this.$refs[el].classList.add('edit');
-    },
-
-    blur(el) {
-      this.$refs[el].classList.remove('edit');
-    },
-
-    change(el) {
-      this.$refs[el].classList.add('change');
-    },
-
     login() {
-      console.log('login');
-
       api
         .post('users/login', this.user)
         .then(res => {
@@ -34,11 +28,7 @@ export default {
           this.$router.push('/manage');
         })
         .catch(err => {
-          let msg = 'an error occured';
-
-          if (err.response) msg = err.response.data;
-
-          Notif.$emit('error', msg);
+          Notif.$emit('error', err.response.data || 'an error occured');
         });
     },
   },
@@ -56,29 +46,14 @@ export default {
     <div class="row justify-content-center">
       <div class="col-5">
         <form @submit="login" class="login">
-          <div class="form-group">
-            <label ref="username" for="username">Username</label>
-            <input
-              id="username"
-              type="text"
-              @focus="edit('username')"
-              @blur="blur('username')"
-              @change="change('username')"
-              v-model="user.username"
-            >
-          </div>
+          <FormInput :val="user.username" handle="username" @setValue="user.username = $event"/>
 
-          <div class="form-group">
-            <label ref="password" for="password">Password</label>
-            <input
-              id="password"
-              type="password"
-              @focus="edit('password')"
-              @blur="blur('password')"
-              @change="change('password')"
-              v-model="user.password"
-            >
-          </div>
+          <FormInput
+            :val="user.password"
+            handle="password"
+            type="password"
+            @setValue="user.password = $event"
+          />
 
           <button type="submit" class="btn">Login</button>
         </form>

@@ -1,15 +1,14 @@
 <script>
 /* eslint-disable no-param-reassign  */
 
-import api from '@/resources/base';
 import Form from '@/components/manage/Form';
-import New from '@/components/manage/New';
+import api from '@/resources/base';
 import Notif from '@/event';
 
 export default {
   props: ['route'],
 
-  components: { Form, New },
+  components: { Form },
 
   data() {
     return { results: [], addNew: false };
@@ -63,7 +62,6 @@ export default {
         </button>
 
         <Form v-if="addNew" state="edit" :route="route" @remove="remove" @add="add"/>
-        <!-- <New :route="route" @add="add"/> -->
       </div>
     </transition-group>
   </div>
