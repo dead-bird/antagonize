@@ -1,9 +1,53 @@
 <script>
+import api from '@/resources/base';
+import Notif from '@/event';
+
 export default {
+  data: () => ({ user: {} }),
+
   computed: {
-    user() {
+    current() {
       return this.$store.state.auth.user;
     },
+
+    config() {
+      return {
+        headers: {
+          Authorization: `Bearer ${this.current.token}`,
+        },
+      };
+    },
+  },
+
+  methods: {
+    save() {
+      api
+        .put(`users/${this.user._id}`, this.user, this.config)
+        .then(res => {
+          const user = {
+            token: this.current.token,
+            ...res.data,
+          };
+
+          delete this.user.password;
+
+          Notif.$emit('success', 'User saved');
+
+          this.$store.commit('login', user);
+        })
+        .catch(err => {
+          Notif.$emit('error', err.response.data || 'an error occured');
+        });
+    },
+  },
+
+  created() {
+    this.user = {
+      username: this.current.username,
+      avatar: this.current.avatar,
+      email: this.current.email,
+      _id: this.current._id,
+    };
   },
 };
 </script>
@@ -19,10 +63,17 @@ export default {
             </div>
 
             <div class="col">
-              <form>
+              <!-- <pre class="dump">{{ user }}</pre> -->
+              <form @submit.prevent="save">
                 <div class="form-group">
                   <label for="username">Username</label>
-                  <input id="username" class="form-control" type="text" v-model="user.username">
+                  <input
+                    type="text"
+                    id="username"
+                    class="form-control"
+                    v-model="user.username"
+                    required
+                  >
                 </div>
 
                 <div class="form-group">
@@ -32,7 +83,7 @@ export default {
 
                 <div class="form-group">
                   <label for="password">Password</label>
-                  <input id="password" class="form-control" type="text" v-model="user.password">
+                  <input id="password" class="form-control" type="password" v-model="user.password">
                 </div>
 
                 <button>Save</button>
