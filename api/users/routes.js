@@ -1,11 +1,13 @@
+require('dotenv').config({ path: '.env' });
+
 const jwt = require('jsonwebtoken');
 const Users = require('./model.js');
 const auth = require('../auth.js');
 const express = require('express');
+const secret = process.env.SECRET;
 const bcrypt = require('bcrypt');
 const router = express.Router();
 const md5 = require('md5');
-const secret = 'secret';
 const salt = 10;
 
 /* Get All Users */
@@ -92,7 +94,7 @@ router.post('/login', (req, res, next) => {
       if (!match) return res.status(403).send('Incorrect username or password');
 
       jwt.sign({ id: user._id }, secret, { expiresIn: '1h' }, (err, token) => {
-        if (err) return error.handle(res, err);
+        if (err) return next(err);
 
         user = formatUser(user);
         user.token = token;

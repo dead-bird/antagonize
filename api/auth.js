@@ -1,5 +1,6 @@
+require('dotenv').config({ path: '.env' });
+
 const jwt = require('jsonwebtoken');
-const secret = 'secret';
 
 module.exports = function(bearer) {
   return new Promise((resolve, reject) => {
@@ -7,7 +8,7 @@ module.exports = function(bearer) {
       reject('Invalid authentication method.');
     }
 
-    jwt.verify(bearer.split(' ')[1], secret, (err, decoded) => {
+    jwt.verify(bearer.split(' ')[1], process.env.SECRET, (err, decoded) => {
       if (err) return reject('Invalid or missing token.');
 
       resolve(decoded.id);
