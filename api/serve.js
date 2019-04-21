@@ -6,7 +6,11 @@ const mongoose = require('mongoose');
 const express = require('express');
 const app = express();
 
-mongoose.connect('mongodb://127.0.0.1/antagonize');
+mongoose.connect('mongodb://127.0.0.1/antagonize', {
+  useCreateIndex: true,
+  useNewUrlParser: true,
+});
+
 mongoose.Promise = global.Promise;
 
 const db = mongoose.connection;
