@@ -27,27 +27,28 @@ export default {
 
 <template>
   <div>
-    <div class="container">
-      <h2>API Endpoint</h2>
-      <pre v-highlightjs><code class="javascript">'{{ base }}'</code></pre>
-      
-      <div class="row align-items-center">
-        <div class="col"><h2>Example</h2></div>
+    <h2>API Endpoint</h2>
+    <pre v-highlightjs><code class="javascript">'{{ base }}'</code></pre>
 
-        <div class="col-auto">
-          <button v-for="o in options" :key="o" @click="selected = o" :class="{active: selected === o}">
-            {{ o }}
-          </button>
-        </div>
+    <div class="row align-items-center">
+      <div class="col">
+        <h2>Example</h2>
       </div>
 
-
-
-      <component :is="selected" :base="base" />
-
-      <h2>Response</h2>
-      <pre v-highlightjs><code>{{ response }}</code></pre>
+      <div class="col-auto">
+        <button
+          v-for="o in options"
+          :key="o"
+          @click="selected = o"
+          :class="{active: selected === o}"
+        >{{ o }}</button>
+      </div>
     </div>
+
+    <component :is="selected" :base="base"/>
+
+    <h2>Response</h2>
+    <pre v-highlightjs><code>{{ response }}</code></pre>
   </div>
 </template>
 
@@ -62,7 +63,12 @@ export default {
 button {
   margin-right: 15px;
   padding: 5px 10px;
+
+  &:last-of-type {
+    margin-right: 0;
+  }
 }
+
 .active {
   border-color: palegreen;
 }

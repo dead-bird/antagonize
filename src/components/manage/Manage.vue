@@ -13,14 +13,16 @@ export default {
 <template>
   <div class="container">
     <div class="row justify-content-center">
-      <div class="col col-lg-4">
-        <List route="modifiers" />
+      <div class="col-md col-lg-4">
+        <List route="modifiers"/>
       </div>
 
-      <div class="col-auto text-center"><div class="line"></div></div>
+      <div class="col-auto text-center">
+        <div class="line"></div>
+      </div>
 
-      <div class="col col-lg-4">
-        <List route="nouns" />
+      <div class="col-md col-lg-4">
+        <List route="nouns"/>
       </div>
     </div>
   </div>

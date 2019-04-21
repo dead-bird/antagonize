@@ -24,9 +24,9 @@ export default {
     <section class="ocean">
       <div class="container">
         <Example/>
-      </div>
 
-      <Define/>
+        <Define/>
+      </div>
     </section>
   </div>
 </template>

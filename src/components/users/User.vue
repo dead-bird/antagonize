@@ -85,7 +85,7 @@ export default {
                   <input id="password" class="form-control" type="password" v-model="user.password">
                 </div>
 
-                <button type="submit">Save</button>
+                <button class="btn" type="submit">Save</button>
               </form>
             </div>
           </div>
@@ -98,7 +98,6 @@ export default {
 <style lang="scss" scoped>
 .user {
   padding-top: 60px;
-  text-align: center;
 }
 
 .profile-image {
@@ -124,11 +123,5 @@ export default {
     outline: 0;
     box-shadow: none;
   }
-}
-
-button {
-  float: right;
-  padding: 10px 20px;
-  font-size: 14px;
 }
 </style>
