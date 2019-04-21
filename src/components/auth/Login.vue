@@ -45,7 +45,7 @@ export default {
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-5">
-        <form @submit="login" class="login">
+        <form @submit.prevent="login" class="login">
           <FormInput :val="user.username" handle="username" @setValue="user.username = $event"/>
 
           <FormInput
