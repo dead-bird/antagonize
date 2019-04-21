@@ -54,7 +54,7 @@ router.put('/:id', (req, res, next) => {
         Users.findByIdAndUpdate(
           req.params.id,
           req.body,
-          { upsert: true },
+          { new: true, upsert: true },
           (err, user) => {
             if (err) return next(err);
 
