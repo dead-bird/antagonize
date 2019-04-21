@@ -9,7 +9,7 @@
     "start": "npm run dev",
     "api": "node api/serve.js",
     "lint": "eslint --ext .js,.vue src",
-    "build": "node build/build.js"
+    "build": "node build/build.js; serve -s dist"
   },
   "dependencies": {
     "axios": "^0.18.0",
