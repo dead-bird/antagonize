@@ -36,6 +36,6 @@ app.use('/nouns', words);
 app.use('/insult', insult);
 app.use('/users', users);
 
-const listener = app.listen(3000, () => {
+const listener = app.listen(3002, () => {
   console.log(`Listening on port ${listener.address().port}, 🅱️ itch`);
 });
