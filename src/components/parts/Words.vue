@@ -26,8 +26,9 @@ h1 {
 
 .desc {
   position: absolute;
-  right: 10px;
+  right: 8px;
   bottom: -6px;
-  font-size: 16px;
+  font-size: 15px;
+  letter-spacing: 0.04em;
 }
 </style>
