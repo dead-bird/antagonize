@@ -63,7 +63,6 @@ export default {
             </div>
 
             <div class="col">
-              <!-- <pre class="dump">{{ user }}</pre> -->
               <form @submit.prevent="save">
                 <div class="form-group">
                   <label for="username">Username</label>
@@ -86,14 +85,12 @@ export default {
                   <input id="password" class="form-control" type="password" v-model="user.password">
                 </div>
 
-                <button>Save</button>
+                <button type="submit">Save</button>
               </form>
             </div>
           </div>
         </div>
       </div>
-
-      <!-- <pre class="dump">{{user}}</pre> -->
     </div>
   </div>
 </template>

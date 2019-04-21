@@ -3,10 +3,9 @@ import Words from '@/components/parts/Words';
 import Insult from '@/components/insults/Insult';
 import Example from '@/components/examples/Example';
 import Define from '@/components/parts/Define';
-import Shark from '@/components/parts/Shark';
 
 export default {
-  components: { Words, Insult, Example, Define, Shark },
+  components: { Words, Insult, Example, Define },
 };
 </script>
 
@@ -15,22 +14,19 @@ export default {
     <section>
       <div class="container">
         <div class="col">
-          <Words />
+          <Words/>
 
-          <Insult />
+          <Insult/>
         </div>
       </div>
-
-      <!-- <Shark /> -->
     </section>
-
 
     <section class="ocean">
       <div class="container">
-        <Example />
+        <Example/>
       </div>
 
-      <Define />
+      <Define/>
     </section>
   </div>
 </template>
