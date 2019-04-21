@@ -1,7 +1,7 @@
 {
   "name": "antagonize",
   "version": "1.0.0",
-  "description": "A Vue.js project",
+  "description": "an API for getting randomly generated insults.",
   "author": "DaveP <dave@wearecrystal.uk>",
   "private": true,
   "scripts": {
