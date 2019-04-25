@@ -1,21 +1,21 @@
 # antagonize
 
-> A Vue.js project
+> an API for getting randomly generated insults.
 
 ## Prerequisites
 
-``` bash
+```bash
 # install dependencies
 npm i
 ```
+
 [**Install MongoDB**](https://docs.mongodb.com/manual/installation/)
 
 [**Create MongoDB dirs and permissions**](https://stackoverflow.com/questions/28987347/setting-read-write-permissions-on-mongodb-folder)
 
-
 ## Dev Workflow
 
-``` bash
+```bash
 # start Webpack
 npm run dev
 
@@ -25,9 +25,10 @@ mongod
 # start API
 npm run api
 ```
+
 ## Build Setup
 
-``` bash
+```bash
 # install dependencies
 npm install
 
